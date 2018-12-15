@@ -1,0 +1,7 @@
+export const ONBOARD_ACTION_TYPES = {
+  ONBOARD_SIGNUP_REQUEST: 'ONBOARD_SIGNUP_REQUEST',
+}
+
+export const onboardSignupRequest = () => ({
+  type: ONBOARD_ACTION_TYPES.ONBOARD_SIGNUP_REQUEST,
+})

@@ -6,13 +6,16 @@ import {
   Dimensions,
   KeyboardAvoidingView,
 } from 'react-native'
+import { connect } from 'react-redux'
 import Screen from '../interface/Screen'
 import Text from '../interface/Text'
 import TextInput from '../interface/TextInput'
 import Flex from '../interface/Flex'
 import { COLORS } from '../interface/constants'
 import Button from '../interface/Button'
+import { onboardSignupRequest } from '../actions/onboarding'
 
+@connect()
 export default class HomeScreen extends Component {
   constructor() {
     super()
@@ -26,6 +29,10 @@ export default class HomeScreen extends Component {
     this.animatedValue = new Animated.Value(1)
     this.deviceWidth = Dimensions.get('window').width
     this.deviceHeight = Dimensions.get('window').height
+  }
+
+  componentDidMount() {
+    this.props.dispatch(onboardSignupRequest())
   }
 
   render() {
@@ -134,6 +141,8 @@ export default class HomeScreen extends Component {
       </Screen>
     )
   }
+
+  handlePressLogin = () => {}
 
   onChangeText = (text, stateKey) => this.setState({ [stateKey]: text })
 

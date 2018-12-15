@@ -1,5 +1,4 @@
 {
   "PORT": 5678,
-  "MONGODB_URI": "mongodb://localhost:27017/charm",
-  "NEEDS_INTERNAL_IP": true
+  "MONGODB_URI": "mongodb://localhost:27017/charm"
 }
