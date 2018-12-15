@@ -1,7 +1,8 @@
-export const ONBOARD_ACTION_TYPES = {
-  ONBOARD_SIGNUP_REQUEST: 'ONBOARD_SIGNUP_REQUEST',
-}
-
-export const onboardSignupRequest = () => ({
-  type: ONBOARD_ACTION_TYPES.ONBOARD_SIGNUP_REQUEST,
+export const onboardSignupRequest = ({ email, password }) => ({
+  type: 'ONBOARD_SIGNUP_REQUEST',
+  payload: {
+    endpoint: 'signup',
+    body: { email, password },
+    method: 'post',
+  },
 })

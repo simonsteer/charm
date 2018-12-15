@@ -1,14 +1,18 @@
-import { take, takeEvery, put, call } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import { ONBOARD_ACTION_TYPES } from '../actions/onboarding'
+import { take, takeLatest, put, call } from 'redux-saga/effects'
 
-function* onboardSaga() {
-  yield delay(1000)
-  yield call(console.log, 'onboard saga triggered')
+function* onboardSaga(action) {
+  const responseAction = yield take([
+    'ONBOARD_SIGNUP_REQUEST_SUCCESS',
+    'ONBOARD_SIGNUP_REQUEST_FAILURE',
+  ])
+
+  console.log(responseAction)
+
+  if (/_FAILURE$/.test(responseAction.type)) {
+    return
+  }
 }
 
-function* watchOnboardSaga() {
-  yield takeEvery(ONBOARD_ACTION_TYPES.ONBOARD_SIGNUP_REQUEST, onboardSaga)
+export default function* watchOnboardSaga() {
+  yield takeLatest('ONBOARD_SIGNUP_REQUEST', onboardSaga)
 }
-
-export default watchOnboardSaga

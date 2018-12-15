@@ -16,11 +16,11 @@ export const getApiUrl = () => {
   const { manifest } = Constants
   const apiUrl =
     typeof manifest.packagerOpts === 'object' && manifest.packagerOpts.dev
-      ? manifest.debuggerHost
+      ? `http://${manifest.debuggerHost
           .split(':')
           .shift()
-          .concat(':5678')
-      : 'api.example.com'
+          .concat(':5678')}`
+      : 'https://api.example.com'
 
   return apiUrl
 }

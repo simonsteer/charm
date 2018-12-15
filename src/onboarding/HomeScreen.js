@@ -14,6 +14,7 @@ import Flex from '../interface/Flex'
 import { COLORS } from '../interface/constants'
 import Button from '../interface/Button'
 import { onboardSignupRequest } from '../actions/onboarding'
+import { usersFetchRequest } from '../actions/users'
 
 @connect()
 export default class HomeScreen extends Component {
@@ -29,10 +30,6 @@ export default class HomeScreen extends Component {
     this.animatedValue = new Animated.Value(1)
     this.deviceWidth = Dimensions.get('window').width
     this.deviceHeight = Dimensions.get('window').height
-  }
-
-  componentDidMount() {
-    this.props.dispatch(onboardSignupRequest())
   }
 
   render() {
