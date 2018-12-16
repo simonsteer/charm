@@ -13,10 +13,17 @@ import TextInput from '../interface/TextInput'
 import Flex from '../interface/Flex'
 import { COLORS } from '../interface/constants'
 import Button from '../interface/Button'
-import { onboardSignupRequest } from '../actions/onboarding'
-import { usersFetchRequest } from '../actions/users'
+import { userSignupRequest, userLoginRequest } from '../actions/user'
 
-@connect()
+const mapDispatchToProps = {
+  userSignupRequest,
+  userLoginRequest,
+}
+
+@connect(
+  null,
+  mapDispatchToProps
+)
 export default class HomeScreen extends Component {
   constructor() {
     super()
@@ -58,14 +65,14 @@ export default class HomeScreen extends Component {
                   <Fragment>
                     <Button
                       color="white"
-                      onPress={this.handlePressSignup}
+                      onPress={this.goToSignupFlow}
                       style={{ width: CONTENT_WIDTH }}
                     >
                       signup
                     </Button>
                     <Button
                       color="white"
-                      onPress={this.handlePressLogin}
+                      onPress={this.goToLoginFlow}
                       style={{ marginTop: 16, width: CONTENT_WIDTH }}
                     >
                       login
@@ -124,6 +131,11 @@ export default class HomeScreen extends Component {
                       <Button
                         color="yellow"
                         disabled={!email || !password}
+                        onPress={
+                          isSignupFlowActive
+                            ? this.handlePressSignup
+                            : this.handlePressLogin
+                        }
                         style={{ width: CONTENT_WIDTH / 2 - 8 }}
                       >
                         {isSignupFlowActive ? 'signup' : 'login'}
@@ -139,7 +151,15 @@ export default class HomeScreen extends Component {
     )
   }
 
-  handlePressLogin = () => {}
+  handlePressLogin = () => {
+    const { email, password } = this.state
+    this.props.userLoginRequest({ email, password })
+  }
+
+  handlePressSignup = () => {
+    const { email, password } = this.state
+    this.props.userSignupRequest({ email, password })
+  }
 
   onChangeText = (text, stateKey) => this.setState({ [stateKey]: text })
 
@@ -162,7 +182,7 @@ export default class HomeScreen extends Component {
     })
   }
 
-  handlePressSignup = () => {
+  goToSignupFlow = () => {
     if (this.isTransitioning) {
       return
     }
@@ -179,7 +199,7 @@ export default class HomeScreen extends Component {
     })
   }
 
-  handlePressLogin = () => {
+  goToLoginFlow = () => {
     if (this.isTransitioning) {
       return
     }

@@ -1,6 +1,10 @@
 import { take, takeLatest, put, call } from 'redux-saga/effects'
 import axios from 'axios'
 import { getApiUrl } from '../interface/constants'
+import {
+  openLoadingIndicator,
+  closeLoadingIndicator,
+} from '../actions/navigation'
 
 const request = async action => {
   const {
@@ -25,7 +29,22 @@ const request = async action => {
 }
 
 function* requestSaga(action) {
+  const {
+    payload: { loadingIndicator },
+  } = action
+
+  if (loadingIndicator) {
+    yield put(openLoadingIndicator({ text: 'loading' }))
+  }
+
   const responseAction = yield call(request, action)
+
+  if (loadingIndicator) {
+    yield put(
+      closeLoadingIndicator({ success: /_SUCCESS$/.test(responseAction.type) })
+    )
+  }
+
   yield put(responseAction)
 }
 

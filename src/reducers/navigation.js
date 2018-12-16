@@ -1,15 +1,15 @@
-import AppContainer from '../navigation/AppContainer'
+// import { AppNavigator } from '../navigation/AppContainer'
 
-export const navigationInitialState = {
-  currentRoute: { routeName: '' },
-}
+// const initialState = {
+//   currentRoute: { routeName: '' },
+// }
 
-const navigationReducer = (state, action) => {
-  const nextState = {
-    ...AppContainer.router.getStateForAction(action, state),
-  }
+// const navigationReducer = (state = initialState, action) => {
+//   const nextState = {
+//     ...AppNavigator.router.getStateForAction(action, state),
+//   }
 
-  return nextState || state
-}
+//   return nextState || state
+// }
 
-export default navigationReducer
+// export default navigationReducer

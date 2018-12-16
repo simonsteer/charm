@@ -1,7 +1,8 @@
 import { all } from 'redux-saga/effects'
-import watchOnboardSaga from './onboardSaga'
+import watchSignupSaga from './signupSaga'
 import watchRequestSaga from './requestSaga'
+import watchLoginSaga from './loginSaga'
 
 export default function* rootSaga() {
-  yield all([watchRequestSaga(), watchOnboardSaga()])
+  yield all([watchRequestSaga(), watchSignupSaga(), watchLoginSaga()])
 }

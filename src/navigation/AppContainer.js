@@ -10,7 +10,7 @@ const OnboardStack = createStackNavigator(
   }
 )
 
-const AppNavigator = createStackNavigator(
+export const AppNavigator = createStackNavigator(
   {
     Home: OnboardStack,
   },
