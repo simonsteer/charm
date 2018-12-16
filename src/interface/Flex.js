@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Animated } from 'react-native'
 
 const Flex = ({
   style,
@@ -15,6 +15,7 @@ const Flex = ({
   spaceBetween,
   spaceAround,
   selfStretch,
+  animated,
 }) => {
   const appliedStyles = [
     { flex },
@@ -31,7 +32,9 @@ const Flex = ({
     style,
   ]
 
-  return <View style={appliedStyles}>{children}</View>
+  const Shell = animated ? Animated.View : View
+
+  return <Shell style={appliedStyles}>{children}</Shell>
 }
 
 Flex.defaultProps = {
@@ -42,6 +45,7 @@ Flex.defaultProps = {
   spaceAround: false,
   style: {},
   flex: null,
+  animated: false,
 }
 
 export default Flex

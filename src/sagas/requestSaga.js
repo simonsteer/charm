@@ -40,8 +40,10 @@ function* requestSaga(action) {
   const responseAction = yield call(request, action)
 
   if (loadingIndicator) {
+    const success = /_SUCCESS$/.test(responseAction.type)
+
     yield put(
-      closeLoadingIndicator({ success: /_SUCCESS$/.test(responseAction.type) })
+      closeLoadingIndicator({ success, text: success ? 'success' : 'error' })
     )
   }
 

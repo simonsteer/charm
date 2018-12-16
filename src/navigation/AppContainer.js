@@ -1,9 +1,11 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import HomeScreen from '../onboarding/HomeScreen'
+import HomeScreen from '../screens/HomeScreen'
+import ProfileScreen from '../screens/ProfileScreen'
 
-const OnboardStack = createStackNavigator(
+const MainStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Profile: ProfileScreen,
   },
   {
     headerMode: 'none',
@@ -12,7 +14,7 @@ const OnboardStack = createStackNavigator(
 
 export const AppNavigator = createStackNavigator(
   {
-    Home: OnboardStack,
+    Home: MainStack,
   },
   {
     initialRouteName: 'Home',

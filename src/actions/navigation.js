@@ -1,9 +1,9 @@
-export const openLoadingIndicator = ({ text }) => ({
+export const openLoadingIndicator = ({ text, onOpen }) => ({
   type: 'OPEN_LOADING_INDICATOR',
-  payload: { text },
+  payload: { text, onOpen },
 })
 
-export const closeLoadingIndicator = ({ success }) => ({
+export const closeLoadingIndicator = ({ success, text, onClose }) => ({
   type: 'CLOSE_LOADING_INDICATOR',
-  payload: { success },
+  payload: { success, text, onClose },
 })

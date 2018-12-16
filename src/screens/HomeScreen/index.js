@@ -7,13 +7,13 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 import { connect } from 'react-redux'
-import Screen from '../interface/Screen'
-import Text from '../interface/Text'
-import TextInput from '../interface/TextInput'
-import Flex from '../interface/Flex'
-import { COLORS } from '../interface/constants'
-import Button from '../interface/Button'
-import { userSignupRequest, userLoginRequest } from '../actions/user'
+import Screen from '../../interface/Screen'
+import Text from '../../interface/Text'
+import TextInput from '../../interface/TextInput'
+import Flex from '../../interface/Flex'
+import { COLORS } from '../../interface/constants'
+import Button from '../../interface/Button'
+import { userSignupRequest, userLoginRequest } from '../../actions/user'
 
 const mapDispatchToProps = {
   userSignupRequest,

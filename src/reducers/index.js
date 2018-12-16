@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
-// import navigation from './navigation'
+import navigation from './navigation'
+import overlay from './overlay'
 import users from './users'
 import session from './session'
 
 const appReducer = combineReducers({
-  // navigation,
+  navigation,
+  overlay,
   session,
   users,
 })
