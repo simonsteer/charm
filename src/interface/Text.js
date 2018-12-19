@@ -24,7 +24,7 @@ const Text = ({
         fontSize: styles.sizes[size],
         letterSpacing,
         lineHeight,
-        fontWeight: bold ? '500' : '400',
+        fontWeight: bold ? '600' : '400',
         ...style,
       }}
     >

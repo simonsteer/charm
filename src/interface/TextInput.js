@@ -33,6 +33,7 @@ export default class TextInput extends Component {
 
     return (
       <RNTextInput
+        autoCapitalize={false}
         placeholder={placeholder}
         style={[
           styles.input,

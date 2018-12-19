@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Dimensions, Platform } from 'react-native'
 import Flex from './Flex'
+import { isIphoneX } from './utils'
 
 const Screen = ({ children, header, color, center, ...flexProps }) => (
   <View
@@ -9,6 +10,7 @@ const Screen = ({ children, header, color, center, ...flexProps }) => (
       flex: 1,
       paddingTop: isIphoneX() ? 44 : 0,
       paddingBottom: isIphoneX() ? 34 : 0,
+      backgroundColor: color,
     }}
   >
     <Flex
@@ -17,7 +19,6 @@ const Screen = ({ children, header, color, center, ...flexProps }) => (
       style={{
         paddingTop: header ? 60 : 0,
         width: Dimensions.get('window').width,
-        backgroundColor: color,
       }}
       {...flexProps}
     >
@@ -34,14 +35,3 @@ Screen.defaultProps = {
 }
 
 export default Screen
-
-export const isIphoneX = () => {
-  const { height, width } = Dimensions.get('window')
-
-  return (
-    Platform.OS === 'ios' &&
-    !Platform.isPad &&
-    !Platform.isTVOS &&
-    (height === 812 || width === 812)
-  )
-}
