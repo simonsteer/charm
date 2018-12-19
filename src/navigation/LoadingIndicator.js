@@ -3,6 +3,8 @@ import { StyleSheet, Animated, Easing } from 'react-native'
 import Flex from '../interface/Flex'
 import Text from '../interface/Text'
 
+MINIMUM_OPEN_DURATION = 1000
+
 export default class LoadingIndicator extends Component {
   static defaultProps = {
     text: 'loading',
@@ -10,45 +12,63 @@ export default class LoadingIndicator extends Component {
     success: null,
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
+      contentValue: new Animated.Value(1),
       elasticValue: new Animated.Value(0),
       linearValue: new Animated.Value(0),
       shouldRender: false,
+      text: props.text,
     }
     this.animationDuration = 300
+    this.openTimestamp = null
   }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.isOpen && nextProps.isOpen) {
-      this.setState({ shouldRender: true })
+      this.openTimestamp = +new Date()
+      this.setState({ text: nextProps.text, shouldRender: true })
       this.openIndicator()
     }
 
     if (this.props.isOpen && !nextProps.isOpen) {
-      this.closeIndicator(() => this.setState({ shouldRender: false }))
+      console.log('ugh')
+      this.indicateResult({ text: nextProps.text, success: nextProps.success })
     }
   }
 
   render() {
     const {
-      state: { linearValue, elasticValue, shouldRender },
-      props: { text, isOpen },
-    } = this
+      linearValue,
+      elasticValue,
+      contentValue,
+      shouldRender,
+      text,
+    } = this.state
 
     if (!shouldRender) {
       return null
     }
 
-    const scale = elasticValue.interpolate({
+    const containerScale = elasticValue.interpolate({
       inputRange: [0, 1],
       outputRange: [0.3, 1],
     })
 
-    const opacity = linearValue.interpolate({
+    const containerOpacity = linearValue.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 0.3],
+    })
+
+    const imageScale = contentValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.3, 1],
+    })
+
+    const textOpacity = contentValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
     })
 
     return (
@@ -56,7 +76,7 @@ export default class LoadingIndicator extends Component {
         <Animated.View
           style={[
             StyleSheet.absoluteFillObject,
-            { backgroundColor: 'black', opacity },
+            { backgroundColor: 'black', opacity: containerOpacity },
           ]}
         />
         <Flex
@@ -64,13 +84,33 @@ export default class LoadingIndicator extends Component {
           center
           style={[
             styles.container,
-            { transform: [{ scale }], opacity: linearValue },
+            { transform: [{ scale: containerScale }], opacity: linearValue },
           ]}
         >
-          <Text>{text.toUpperCase()}</Text>
+          <Animated.View style={{ opacity: textOpacity }}>
+            <Text bold>{text.toUpperCase()}</Text>
+          </Animated.View>
         </Flex>
       </Flex>
     )
+  }
+
+  indicateResult = ({ text, success }) => {
+    Animated.timing(this.state.contentValue, {
+      toValue: 0,
+      duration: 200,
+    }).start(() => {
+      this.setState({ text })
+      Animated.timing(this.state.contentValue, {
+        toValue: 1,
+        duration: 200,
+      }).start(() => {
+        this.closeIndicator(() => {
+          this.openTimestamp = null
+          this.setState({ shouldRender: false })
+        })
+      })
+    })
   }
 
   openIndicator = callback =>
@@ -88,25 +128,34 @@ export default class LoadingIndicator extends Component {
       }),
     ]).start(callback)
 
-  closeIndicator = callback =>
-    Animated.parallel([
-      Animated.timing(this.state.elasticValue, {
-        toValue: 0,
-        duration: this.animationDuration,
-        easing: Easing.back(),
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.linearValue, {
-        toValue: 0,
-        duration: this.animationDuration,
-        useNativeDriver: true,
-      }),
+  closeIndicator = callback => {
+    const closeTimestamp = +new Date()
+    const timeOpen = closeTimestamp - this.openTimestamp
+    const shouldDelay = timeOpen < MINIMUM_OPEN_DURATION
+    const difference = MINIMUM_OPEN_DURATION - timeOpen
+
+    Animated.sequence([
+      Animated.delay(shouldDelay ? difference : 0),
+      Animated.parallel([
+        Animated.timing(this.state.elasticValue, {
+          toValue: 0,
+          duration: this.animationDuration,
+          easing: Easing.back(),
+          useNativeDriver: true,
+        }),
+        Animated.timing(this.state.linearValue, {
+          toValue: 0,
+          duration: this.animationDuration,
+          useNativeDriver: true,
+        }),
+      ]),
     ]).start(callback)
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    width: 150,
     height: 150,
     borderRadius: 8,
     backgroundColor: 'white',
