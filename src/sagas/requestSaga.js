@@ -1,4 +1,4 @@
-import { take, takeLatest, put, call } from 'redux-saga/effects'
+import { take, takeEvery, put, call } from 'redux-saga/effects'
 import axios from 'axios'
 import { getApiUrl } from '../interface/constants'
 import {
@@ -41,7 +41,6 @@ function* requestSaga(action) {
 
   if (loadingIndicator) {
     const success = /_SUCCESS$/.test(responseAction.type)
-
     yield put(
       closeLoadingIndicator({ success, text: success ? 'success' : 'error' })
     )
@@ -51,5 +50,5 @@ function* requestSaga(action) {
 }
 
 export default function* watchRequestSaga() {
-  yield takeLatest(action => /_REQUEST$/.test(action.type), requestSaga)
+  yield takeEvery(action => /_REQUEST$/.test(action.type), requestSaga)
 }
