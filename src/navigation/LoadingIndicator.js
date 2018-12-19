@@ -17,7 +17,7 @@ export default class LoadingIndicator extends Component {
       linearValue: new Animated.Value(0),
       shouldRender: false,
     }
-    this.duration = 300
+    this.animationDuration = 300
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,7 +33,6 @@ export default class LoadingIndicator extends Component {
 
   render() {
     const {
-      duration,
       state: { linearValue, elasticValue, shouldRender },
       props: { text, isOpen },
     } = this
@@ -78,13 +77,13 @@ export default class LoadingIndicator extends Component {
     Animated.parallel([
       Animated.timing(this.state.elasticValue, {
         toValue: 1,
-        duration: this.duration,
+        duration: this.animationDuration,
         easing: Easing.elastic(),
         useNativeDriver: true,
       }),
       Animated.timing(this.state.linearValue, {
         toValue: 1,
-        duration: this.duration,
+        duration: this.animationDuration,
         useNativeDriver: true,
       }),
     ]).start(callback)
@@ -93,13 +92,13 @@ export default class LoadingIndicator extends Component {
     Animated.parallel([
       Animated.timing(this.state.elasticValue, {
         toValue: 0,
-        duration: this.duration,
+        duration: this.animationDuration,
         easing: Easing.back(),
         useNativeDriver: true,
       }),
       Animated.timing(this.state.linearValue, {
         toValue: 0,
-        duration: this.duration,
+        duration: this.animationDuration,
         useNativeDriver: true,
       }),
     ]).start(callback)
