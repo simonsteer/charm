@@ -6,10 +6,6 @@ import {
   getLoadingIndicator,
   getAlert,
 } from '../selectors/navigation'
-import {
-  openLoadingIndicator,
-  closeLoadingIndicator,
-} from '../actions/navigation'
 import LoadingIndicator from './LoadingIndicator'
 
 const mapStateToProps = state => ({
@@ -17,20 +13,10 @@ const mapStateToProps = state => ({
   loadingIndicator: getLoadingIndicator(state),
   alert: getAlert(state),
 })
-
-const mapDispatchToProps = {
-  openLoadingIndicator,
-  closeLoadingIndicator,
-}
-
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
+@connect(mapStateToProps)
 export default class Charm extends Component {
   render() {
     const { navigation, dispatch, alert, loadingIndicator } = this.props
-    console.log(loadingIndicator)
 
     return (
       <Fragment>
