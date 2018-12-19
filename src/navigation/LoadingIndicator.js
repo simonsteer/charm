@@ -104,16 +104,11 @@ export default class LoadingIndicator extends Component {
       Animated.timing(this.state.contentValue, {
         toValue: 1,
         duration: 200,
-      }).start(() => {
-        this.closeIndicator(() => {
-          this.openTimestamp = null
-          this.setState({ shouldRender: false })
-        })
-      })
+      }).start(this.closeIndicator)
     })
   }
 
-  openIndicator = callback =>
+  openIndicator = () =>
     Animated.parallel([
       Animated.timing(this.state.elasticValue, {
         toValue: 1,
@@ -126,31 +121,22 @@ export default class LoadingIndicator extends Component {
         duration: this.animationDuration,
         useNativeDriver: true,
       }),
-    ]).start(callback)
+    ]).start()
 
-  closeIndicator = callback => {
-    const closeTimestamp = +new Date()
-    const timeOpen = closeTimestamp - this.openTimestamp
-    const shouldDelay = timeOpen < MINIMUM_OPEN_DURATION
-    const difference = MINIMUM_OPEN_DURATION - timeOpen
-
-    Animated.sequence([
-      Animated.delay(shouldDelay ? difference : 0),
-      Animated.parallel([
-        Animated.timing(this.state.elasticValue, {
-          toValue: 0,
-          duration: this.animationDuration,
-          easing: Easing.back(),
-          useNativeDriver: true,
-        }),
-        Animated.timing(this.state.linearValue, {
-          toValue: 0,
-          duration: this.animationDuration,
-          useNativeDriver: true,
-        }),
-      ]),
-    ]).start(callback)
-  }
+  closeIndicator = callback =>
+    Animated.parallel([
+      Animated.timing(this.state.elasticValue, {
+        toValue: 0,
+        duration: this.animationDuration,
+        easing: Easing.back(),
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.state.linearValue, {
+        toValue: 0,
+        duration: this.animationDuration,
+        useNativeDriver: true,
+      }),
+    ]).start(() => this.setState({ shouldRender: false }))
 }
 
 const styles = StyleSheet.create({
