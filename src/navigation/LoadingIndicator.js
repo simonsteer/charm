@@ -39,44 +39,18 @@ export default class LoadingIndicator extends Component {
   }
 
   render() {
-    const {
-      linearValue,
-      elasticValue,
-      contentValue,
-      shouldRender,
-      text,
-    } = this.state
+    const { linearValue, contentValue, shouldRender, text } = this.state
 
     if (!shouldRender) {
       return null
     }
-
-    const containerScale = elasticValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0.3, 1],
-    })
-
-    const containerOpacity = linearValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 0.3],
-    })
-
-    const imageScale = contentValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0.3, 1],
-    })
-
-    const textOpacity = contentValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-    })
 
     return (
       <Flex center style={StyleSheet.absoluteFill}>
         <Animated.View
           style={[
             StyleSheet.absoluteFillObject,
-            { backgroundColor: 'black', opacity: containerOpacity },
+            { backgroundColor: 'black', opacity: this.overlayOpacity },
           ]}
         />
         <Flex
@@ -84,15 +58,39 @@ export default class LoadingIndicator extends Component {
           center
           style={[
             styles.container,
-            { transform: [{ scale: containerScale }], opacity: linearValue },
+            {
+              transform: [{ scale: this.indicatorScale }],
+              opacity: linearValue,
+            },
           ]}
         >
-          <Animated.View style={{ opacity: textOpacity }}>
+          <Animated.View style={{ opacity: contentValue }}>
             <Text bold>{text.toUpperCase()}</Text>
           </Animated.View>
         </Flex>
       </Flex>
     )
+  }
+
+  get overlayOpacity() {
+    return this.state.linearValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 0.3],
+    })
+  }
+
+  get indicatorScale() {
+    return this.state.elasticValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.3, 1],
+    })
+  }
+
+  get imageScale() {
+    return this.state.contentValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.3, 1],
+    })
   }
 
   indicateResult = ({ text, success }) => {
