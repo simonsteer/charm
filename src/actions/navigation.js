@@ -1,4 +1,10 @@
 import noop from 'lodash/noop'
+import { NavigationActions } from 'react-navigation'
+
+export const routeTo = (routeName, params) =>
+  NavigationActions.navigate({ routeName, params })
+
+export const routeBack = () => NavigationActions.back()
 
 export const openLoadingIndicator = ({ text = 'loading' } = {}) => ({
   type: 'OPEN_LOADING_INDICATOR',

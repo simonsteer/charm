@@ -33,7 +33,6 @@ export default class LoadingIndicator extends Component {
     }
 
     if (this.props.isOpen && !nextProps.isOpen) {
-      console.log('ugh')
       this.indicateResult({ text: nextProps.text, success: nextProps.success })
     }
   }

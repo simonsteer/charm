@@ -6,6 +6,7 @@ import {
   getLoadingIndicator,
   getAlert,
 } from '../selectors/navigation'
+import { setTopLevelNavigator } from './navigationService'
 import LoadingIndicator from './LoadingIndicator'
 
 const mapStateToProps = state => ({
@@ -20,7 +21,11 @@ export default class Charm extends Component {
 
     return (
       <Fragment>
-        <AppContainer state={navigation} dispatch={dispatch} />
+        <AppContainer
+          ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
+          state={navigation}
+          dispatch={dispatch}
+        />
         <LoadingIndicator {...loadingIndicator} />
       </Fragment>
     )

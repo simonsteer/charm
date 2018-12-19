@@ -6,6 +6,7 @@ import { getLoadingIndicator } from '../selectors/navigation'
 import {
   openLoadingIndicator,
   closeLoadingIndicator,
+  routeTo,
 } from '../actions/navigation'
 
 function* loginSaga(action) {
@@ -40,6 +41,7 @@ function* loginSaga(action) {
   }
 
   yield put(closeLoadingIndicator())
+  yield put(routeTo('Profile'))
 }
 
 export default function* watchLoginSaga() {
