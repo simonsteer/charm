@@ -5,8 +5,8 @@ import Screen from '../../interface/Screen'
 import Header from '../../interface/Header'
 import Text from '../../interface/Text'
 import { COLORS } from '../../interface/constants'
-import DisplayImage from './DisplayImage'
-import AboutMe from './AboutMe'
+import DisplayImages from './DisplayImages'
+import About from './About'
 
 export default class ProfileScreen extends Component {
   constructor() {
@@ -37,7 +37,7 @@ export default class ProfileScreen extends Component {
               ],
             }}
           >
-            <DisplayImage
+            <DisplayImages
               images={[
                 'https://picsum.photos/450/450',
                 'https://picsum.photos/500/500',
@@ -45,7 +45,7 @@ export default class ProfileScreen extends Component {
               ]}
             />
           </Animated.View>
-          <AboutMe />
+          <About />
         </Animated.ScrollView>
       </Screen>
     )

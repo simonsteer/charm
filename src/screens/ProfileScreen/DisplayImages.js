@@ -6,11 +6,12 @@ import Text from '../../interface/Text'
 import Flex from '../../interface/Flex'
 import { COLORS } from '../../interface/constants'
 
-const DisplayImage = ({ images }) => (
+const DisplayImages = ({ images }) => (
   <View>
     <FlatList
       horizontal
       data={images}
+      decelerationRate="fast"
       snapToInterval={config.deviceWidth}
       renderItem={({ item, index }) => (
         <ImageBackground
@@ -39,15 +40,16 @@ const DisplayImage = ({ images }) => (
       }}
       row
       spaceBetween
+      alignEnd
     >
       <Text bold size="large" color="white">
         DisplayName
       </Text>
-      <Text bold size="large" color="white">
+      <Text bold color="white">
         87% ❤️
       </Text>
     </Flex>
   </View>
 )
 
-export default DisplayImage
+export default DisplayImages

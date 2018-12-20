@@ -13,17 +13,17 @@ const Screen = ({ children, header, color, ...flexProps }) => (
       backgroundColor: color,
     }}
   >
-    {!!header && header}
     <Flex
       flex={1}
       style={{
-        paddingTop: header ? 60 : 0,
+        paddingTop: header ? (config.isIphoneX ? 56 : 88) : 0,
         width: config.deviceWidth,
       }}
       {...flexProps}
     >
       {children}
     </Flex>
+    {!!header && header}
   </View>
 )
 

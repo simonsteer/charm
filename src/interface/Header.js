@@ -24,29 +24,31 @@ const Header = ({
       {
         backgroundColor: color,
         width: config.deviceWidth,
-        height: config.isIphoneX ? 104 : 60,
-        paddingTop: config.isIphoneX ? 44 : 0,
+        height: config.isIphoneX ? 100 : 88,
+        paddingTop: config.isIphoneX ? 32 : 24,
         borderBottomWidth: border ? StyleSheet.hairlineWidth : 0,
         borderBottomColor: 'rgba(0,0,0,0.2)',
       },
     ]}
   >
-    <Flex center style={[styles.leftChild, { top: config.isIphoneX ? 44 : 0 }]}>
+    <Flex center>
       {leftChild ? (
         leftChild
       ) : (
         <TouchableOpacity onPress={routeBack}>
-          <Text style={{ padding: 16 }}>BACK</Text>
+          <View
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 16,
+              backgroundColor: COLORS.teal,
+            }}
+          />
         </TouchableOpacity>
       )}
     </Flex>
     <Text>{headerText}</Text>
-    <Flex
-      center
-      style={[styles.rightChild, { top: config.isIphoneX ? 44 : 0 }]}
-    >
-      {rightChild}
-    </Flex>
+    <Flex center>{rightChild}</Flex>
   </Flex>
 )
 

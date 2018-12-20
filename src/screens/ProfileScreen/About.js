@@ -4,7 +4,7 @@ import { config } from '../../interface/utils'
 import Text from '../../interface/Text'
 import { COLORS } from '../../interface/constants'
 
-const AboutMe = () => (
+const About = () => (
   <View style={{ padding: 16 }}>
     <View
       style={{
@@ -21,4 +21,4 @@ const AboutMe = () => (
   </View>
 )
 
-export default AboutMe
+export default About

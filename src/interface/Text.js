@@ -15,7 +15,7 @@ const Text = ({
   selectable,
   ...restProps
 }) => (
-  <View pointerEvents={selectable ? 'all' : 'none'}>
+  <View pointerEvents={selectable ? 'auto' : 'none'}>
     <RNText
       {...restProps}
       style={{
