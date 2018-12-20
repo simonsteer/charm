@@ -14,6 +14,7 @@ import Flex from '../../interface/Flex'
 import { COLORS } from '../../interface/constants'
 import Button from '../../interface/Button'
 import { userSignupRequest, userLoginRequest } from '../../actions/user'
+import { emailPattern } from '../../interface/utils'
 
 const mapDispatchToProps = {
   userSignupRequest,
@@ -92,6 +93,8 @@ export default class HomeScreen extends Component {
                       your email address:
                     </Text>
                     <TextInput
+                      autoFocus
+                      shouldTrim
                       onChangeText={text => this.onChangeText(text, 'email')}
                       textContentType="emailAddress"
                       placeholder={'email address'}
@@ -111,6 +114,7 @@ export default class HomeScreen extends Component {
                         : 'your password:'}
                     </Text>
                     <TextInput
+                      enablesReturnKeyAutomatically
                       secureTextEntry
                       onChangeText={text => this.onChangeText(text, 'password')}
                       placeholder="password"
@@ -130,7 +134,9 @@ export default class HomeScreen extends Component {
                       </Button>
                       <Button
                         color="yellow"
-                        disabled={!email || !password}
+                        disabled={
+                          !email || !password || !emailPattern.test(email)
+                        }
                         onPress={
                           isSignupFlowActive
                             ? this.handlePressSignup

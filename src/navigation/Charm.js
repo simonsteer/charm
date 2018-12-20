@@ -6,6 +6,7 @@ import {
   getLoadingIndicator,
   getAlert,
 } from '../selectors/navigation'
+import { routeTo } from '../actions/navigation'
 import { setTopLevelNavigator } from './navigationService'
 import LoadingIndicator from './LoadingIndicator'
 
@@ -16,6 +17,10 @@ const mapStateToProps = state => ({
 })
 @connect(mapStateToProps)
 export default class Charm extends Component {
+  componentDidMount() {
+    this.props.dispatch(routeTo('Profile'))
+  }
+
   render() {
     const { navigation, dispatch, alert, loadingIndicator } = this.props
 

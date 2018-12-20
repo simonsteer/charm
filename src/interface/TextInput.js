@@ -10,6 +10,7 @@ export default class TextInput extends Component {
     onFocus() {},
     style: {},
     placeholder: '',
+    shouldTrim: false,
   }
 
   state = {
@@ -33,7 +34,8 @@ export default class TextInput extends Component {
 
     return (
       <RNTextInput
-        autoCapitalize={false}
+        autoCorrect={false}
+        autoCapitalize="none"
         placeholder={placeholder}
         style={[
           styles.input,
@@ -55,7 +57,14 @@ export default class TextInput extends Component {
     )
   }
 
-  handleChangeText = text => {
+  handleChangeText = value => {
+    const { shouldTrim } = this.props
+
+    let text = value
+    if (shouldTrim) {
+      text = value.trim()
+    }
+
     this.setState({ text })
     this.props.onChangeText(text)
   }
