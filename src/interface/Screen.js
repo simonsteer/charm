@@ -2,14 +2,21 @@ import React from 'react'
 import { View, Dimensions, Platform } from 'react-native'
 import Flex from './Flex'
 import { config } from './utils'
+import { IPHONE_X_SAFE_BOTTOM_PADDING } from './constants'
 
-const Screen = ({ children, header, color, ...flexProps }) => (
+const Screen = ({
+  children,
+  header,
+  color,
+  useBottomPadding,
+  ...flexProps
+}) => (
   <View
     style={{
       width: Dimensions.get('window').width,
       flex: 1,
       paddingTop: config.isIphoneX ? 44 : 0,
-      paddingBottom: config.isIphoneX ? 34 : 0,
+      paddingBottom: useBottomPadding ? IPHONE_X_SAFE_BOTTOM_PADDING : 0,
       backgroundColor: color,
     }}
   >
@@ -31,6 +38,7 @@ Screen.defaultProps = {
   center: false,
   children: null,
   color: 'white',
+  useBottomPadding: true,
 }
 
 export default Screen

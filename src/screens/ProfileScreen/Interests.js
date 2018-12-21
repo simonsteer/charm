@@ -11,6 +11,7 @@ const Interests = ({ interests, style }) => (
     <Flex row wrap style={{ overflow: 'hidden' }}>
       {interests.map((interest, index) => (
         <Pill
+          key={`interest-${index}`}
           style={{
             marginRight: index === interests.length - 1 ? 0 : 16,
             marginBottom: 16,

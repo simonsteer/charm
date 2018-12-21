@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: COLORS.white,
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 100,
+    borderRadius: 8,
     fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    letterSpacing: 0.75,
+    padding: 12,
   },
 })

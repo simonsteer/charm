@@ -32,7 +32,7 @@ Button.defaultProps = {
   onPress() {},
   size: 'medium',
   style: {},
-  color: 'teal',
+  color: 'yellow',
   disabled: false,
   children: null,
 }
@@ -41,7 +41,7 @@ export default Button
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 100,
+    borderRadius: 8,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },

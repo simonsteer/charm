@@ -1,4 +1,5 @@
 import { Constants } from 'expo'
+import { config } from './utils'
 
 export const COLORS = {
   yellow: '#FFE97F',
@@ -24,3 +25,5 @@ export const getApiUrl = () => {
 
   return apiUrl
 }
+
+export const IPHONE_X_SAFE_BOTTOM_PADDING = config.isIphoneX ? 34 : 0

@@ -11,15 +11,14 @@ import { config } from './utils'
 const Header = ({
   leftChild,
   rightChild,
-  headerText,
+  header,
   routeBack,
   color,
   border,
 }) => (
   <Flex
     row
-    spaceBetween
-    alignCenter
+    center
     style={[
       styles.container,
       {
@@ -32,26 +31,39 @@ const Header = ({
       },
     ]}
   >
-    <Flex center>
+    <Flex center style={styles.leftChild}>
       {leftChild ? (
         leftChild
       ) : (
         <TouchableOpacity onPress={routeBack}>
-          <Flex style={styles.backButton} center>
-            <Icon color={COLORS.white} />
-          </Flex>
+          <Icon
+            circle
+            backgroundColor={COLORS.black}
+            color={COLORS.white}
+            style={{ paddingRight: 2, paddingTop: 2 }}
+          />
         </TouchableOpacity>
       )}
     </Flex>
-    <Text>{headerText}</Text>
-    <Flex center>{rightChild}</Flex>
+    {!!header &&
+      (typeof header === 'string' ? (
+        <Text bold size="title">
+          {header}
+        </Text>
+      ) : (
+        header
+      ))}
+
+    <Flex center style={styles.rightChild}>
+      {rightChild}
+    </Flex>
   </Flex>
 )
 
 Header.defaultProps = {
   leftChild: null,
   rightChild: null,
-  headerText: null,
+  header: null,
   routeBack() {},
   color: 'transparent',
   border: false,
@@ -71,14 +83,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
-    paddingHorizontal: 16,
   },
-  backButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    paddingRight: 2,
-    paddingTop: 2,
-    backgroundColor: COLORS.black,
+  leftChild: {
+    position: 'absolute',
+    left: 16,
+    bottom: 16,
+  },
+  rightChild: {
+    position: 'absolute',
+    right: 16,
+    bottom: 16,
   },
 })

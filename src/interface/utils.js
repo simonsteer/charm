@@ -23,4 +23,10 @@ export const config = {
   get deviceHeight() {
     return Dimensions.get('window').height
   },
+  get isAndroid() {
+    return Platform.OS !== 'ios'
+  },
+  get isIos() {
+    return Platform.OS === 'ios'
+  },
 }

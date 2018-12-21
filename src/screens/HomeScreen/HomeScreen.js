@@ -82,11 +82,9 @@ export default class HomeScreen extends Component {
                     <Text
                       style={{
                         width: CONTENT_WIDTH,
-                        marginLeft: 16,
                         marginBottom: 4,
                       }}
                       size="small"
-                      color="white"
                     >
                       your email address:
                     </Text>
@@ -101,11 +99,9 @@ export default class HomeScreen extends Component {
                     <Text
                       style={{
                         width: CONTENT_WIDTH,
-                        marginLeft: 16,
                         marginBottom: 4,
                       }}
                       size="small"
-                      color="white"
                     >
                       {isSignupFlowActive
                         ? 'your desired password:'

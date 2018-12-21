@@ -1,22 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import Icon from '../../interface/Icon'
 import Text from '../../interface/Text'
+import TextInput from '../../interface/TextInput'
 import SectionTitle from '../../shared/SectionTitle'
 
-const About = ({ style, text }) => (
-  <View style={[styles.container, style]}>
-    <SectionTitle text="About Me" rightChild={<Icon name="ios-person" />} />
-    <Text>{text}</Text>
-  </View>
-)
+export default class About extends Component {
+  static defaultProps = {
+    style: {},
+    text: '',
+  }
 
-About.defaultProps = {
-  style: {},
-  text: '',
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: props.text,
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isEditMode && this.props.isEditMode) {
+      this.setState({ value: nextProps.text })
+    }
+  }
+
+  render() {
+    const {
+      props: { style, isEditMode, text },
+      state: { value },
+    } = this
+
+    return (
+      <View style={[styles.container, style]}>
+        <SectionTitle text="About Me" rightChild={<Icon name="ios-person" />} />
+        {isEditMode ? (
+          <TextInput
+            multiline={true}
+            numberOfLines={7}
+            onChangeText={this.handleChangText}
+            value={value}
+            style={{ paddingTop: 12 }}
+          />
+        ) : (
+          <Text style={{ padding: 12 }}>{text}</Text>
+        )}
+      </View>
+    )
+  }
+
+  handleChangText = value => this.setState({ value })
 }
-
-export default About
 
 const styles = StyleSheet.create({
   container: { padding: 16, marginBottom: 16 },
