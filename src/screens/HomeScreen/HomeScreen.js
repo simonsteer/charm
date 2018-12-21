@@ -51,13 +51,13 @@ export default class HomeScreen extends Component {
     const CONTENT_WIDTH = this.deviceWidth - 80
 
     return (
-      <Screen color={COLORS.teal}>
+      <Screen>
         <KeyboardAvoidingView
           behavior="position"
           contentContainerStyle={{ height: '100%' }}
         >
           <Flex spaceBetween flex={1} style={{ marginVertical: 40 }}>
-            <Text size="jumbo" color="yellow" bold center>
+            <Text size="jumbo" bold center>
               CHARM
             </Text>
             <Flex center style={{ width: this.deviceWidth }}>
@@ -65,14 +65,12 @@ export default class HomeScreen extends Component {
                 {!isSignupFlowActive && !isLoginFlowActive ? (
                   <Fragment>
                     <Button
-                      color="white"
                       onPress={this.goToSignupFlow}
                       style={{ width: CONTENT_WIDTH }}
                     >
                       signup
                     </Button>
                     <Button
-                      color="white"
                       onPress={this.goToLoginFlow}
                       style={{ marginTop: 16, width: CONTENT_WIDTH }}
                     >

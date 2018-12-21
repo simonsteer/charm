@@ -21,10 +21,9 @@ const Text = ({
       style={{
         textAlign: center ? 'center' : 'left',
         color: COLORS[color],
-        fontSize: styles.sizes[size],
-        letterSpacing,
+        ...styles[size],
         lineHeight,
-        fontWeight: bold ? '600' : '400',
+        fontWeight: bold ? '700' : '400',
         ...style,
       }}
     >
@@ -48,11 +47,24 @@ Text.defaultProps = {
 export default Text
 
 const styles = {
-  sizes: {
-    small: 12,
-    medium: 16,
-    title: 20,
-    large: 24,
-    jumbo: 32,
+  small: {
+    fontSize: 12,
+    letterSpacing: 0.25,
+  },
+  medium: {
+    fontSize: 16,
+    letterSpacing: 0.75,
+  },
+  title: {
+    fontSize: 20,
+    letterSpacing: 0.75,
+  },
+  large: {
+    fontSize: 24,
+    letterSpacing: 0.75,
+  },
+  jumbo: {
+    fontSize: 32,
+    letterSpacing: 0.75,
   },
 }

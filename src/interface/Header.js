@@ -3,17 +3,18 @@ import { StyleSheet, Dimensions, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Flex from './Flex'
 import Text from './Text'
+import Icon from './Icon'
 import { COLORS } from './constants'
 import { routeBack } from '../actions/navigation'
 import { config } from './utils'
 
 const Header = ({
-  leftChild = null,
-  rightChild = null,
-  headerText = null,
+  leftChild,
+  rightChild,
+  headerText,
   routeBack,
-  color = 'transparent',
-  border = false,
+  color,
+  border,
 }) => (
   <Flex
     row
@@ -27,7 +28,7 @@ const Header = ({
         height: config.isIphoneX ? 100 : 88,
         paddingTop: config.isIphoneX ? 32 : 24,
         borderBottomWidth: border ? StyleSheet.hairlineWidth : 0,
-        borderBottomColor: 'rgba(0,0,0,0.2)',
+        borderBottomColor: 'rgba(0,0,0,0.5)',
       },
     ]}
   >
@@ -36,14 +37,9 @@ const Header = ({
         leftChild
       ) : (
         <TouchableOpacity onPress={routeBack}>
-          <View
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: 16,
-              backgroundColor: COLORS.teal,
-            }}
-          />
+          <Flex style={styles.backButton} center>
+            <Icon color={COLORS.white} />
+          </Flex>
         </TouchableOpacity>
       )}
     </Flex>
@@ -51,6 +47,15 @@ const Header = ({
     <Flex center>{rightChild}</Flex>
   </Flex>
 )
+
+Header.defaultProps = {
+  leftChild: null,
+  rightChild: null,
+  headerText: null,
+  routeBack() {},
+  color: 'transparent',
+  border: false,
+}
 
 const mapDispatchToProps = {
   routeBack,
@@ -68,16 +73,12 @@ const styles = StyleSheet.create({
     top: 0,
     paddingHorizontal: 16,
   },
-  leftChild: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-  },
-  rightChild: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
+  backButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    paddingRight: 2,
+    paddingTop: 2,
+    backgroundColor: COLORS.black,
   },
 })

@@ -7,6 +7,7 @@ import Text from '../../interface/Text'
 import { COLORS } from '../../interface/constants'
 import DisplayImages from './DisplayImages'
 import About from './About'
+import Interests from './Interests'
 
 export default class ProfileScreen extends Component {
   constructor() {
@@ -25,16 +26,13 @@ export default class ProfileScreen extends Component {
     return (
       <Screen color={COLORS.white} center header={<Header border />}>
         <Animated.ScrollView
-          scrollEventThrottle={14}
           onScroll={this.onScrollEvent}
+          scrollEventThrottle={14}
           style={styles.scrollview}
         >
           <Animated.View
             style={{
-              transform: [
-                { scale: this.displayImageScale },
-                { translateY: this.displayImageTranslateY },
-              ],
+              transform: [{ translateY: this.displayImageTranslateY }],
             }}
           >
             <DisplayImages
@@ -45,24 +43,27 @@ export default class ProfileScreen extends Component {
               ]}
             />
           </Animated.View>
-          <About />
+          <About
+            text={`Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore `}
+          />
+          <Interests
+            interests={[
+              'art & design',
+              'music',
+              'politics',
+              'computer science',
+              'health & fitness',
+            ]}
+          />
         </Animated.ScrollView>
       </Screen>
     )
   }
 
-  get displayImageScale() {
-    return this.scrollValue.interpolate({
-      inputRange: [-config.deviceWidth, 0],
-      outputRange: [1.7, 1],
-      extrapolateRight: 'clamp',
-    })
-  }
-
   get displayImageTranslateY() {
     return this.scrollValue.interpolate({
       inputRange: [-config.deviceWidth, 0],
-      outputRange: [-config.deviceWidth * 0.7, 0],
+      outputRange: [-config.deviceWidth, 0],
       extrapolateRight: 'clamp',
     })
   }

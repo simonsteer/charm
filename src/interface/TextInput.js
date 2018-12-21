@@ -42,9 +42,7 @@ export default class TextInput extends Component {
           style,
           {
             color: COLORS.darkGrey,
-            borderColor: isFocused
-              ? 'rgba(0, 0, 0, 0.5)'
-              : 'rgba(0, 0, 0, 0.1)',
+            borderColor: isFocused ? COLORS.black : 'rgba(0, 0, 0, 0.3)',
           },
         ]}
         selectionColor={COLORS.yellow}

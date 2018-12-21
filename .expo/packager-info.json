@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 48373,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://na-si4.anonymous.charm.exp.direct",
   "packagerNgrokUrl": "https://packager.na-si4.anonymous.charm.exp.direct",
-  "ngrokPid": 48395
+  "ngrokPid": 71450
 }
