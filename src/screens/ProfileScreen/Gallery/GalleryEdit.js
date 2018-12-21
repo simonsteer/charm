@@ -105,18 +105,13 @@ export default class GalleryEdit extends Component {
       outputRange: [0, this.imageWrapperWidth + 16],
     }
 
-    const currentTranslateX = this.currentValue.x.interpolate(interpolations)
-    const currentTranslateY = this.currentValue.y.interpolate(interpolations)
-    const nextTranslateX = this.nextValue.x.interpolate(interpolations)
-    const nextTranslateY = this.nextValue.y.interpolate(interpolations)
-
     const currentTransforms = [
-      { translateX: currentTranslateX },
-      { translateY: currentTranslateY },
+      { translateX: this.currentValue.x.interpolate(interpolations) },
+      { translateY: this.currentValue.y.interpolate(interpolations) },
     ]
     const nextTransforms = [
-      { translateX: nextTranslateX },
-      { translateY: nextTranslateY },
+      { translateX: this.nextValue.x.interpolate(interpolations) },
+      { translateY: this.nextValue.y.interpolate(interpolations) },
     ]
 
     return { currentTransforms, nextTransforms }
