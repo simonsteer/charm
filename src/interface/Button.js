@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 
 const BUTTON_TEXT_COLORS = {
   teal: 'white',
+  black: 'white',
   disabled: 'mediumGrey',
   white: 'darkGrey',
   yellow: 'darkGrey',

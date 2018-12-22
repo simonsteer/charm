@@ -49,8 +49,8 @@ export default class ProfileScreen extends Component {
             header={
               isEditMode ? (
                 <TextInput
-                  value={displayNameValue}
                   onChangeText={this.handleChangeDisplayNameText}
+                  placeholder="display name"
                   style={{
                     width: config.deviceWidth / 2,
                     fontSize: 20,
@@ -58,6 +58,7 @@ export default class ProfileScreen extends Component {
                     textAlign: 'center',
                     fontWeight: '700',
                   }}
+                  value={displayNameValue}
                 />
               ) : (
                 displayNameValue
@@ -69,7 +70,11 @@ export default class ProfileScreen extends Component {
                   circle
                   color={COLORS.white}
                   name={isEditMode ? 'ios-save' : 'md-create'}
-                  style={{ paddingTop: 1, paddingLeft: 1 }}
+                  style={{
+                    paddingTop: 1,
+                    paddingLeft: 1,
+                    backgroundColor: COLORS.black,
+                  }}
                   size={20}
                 />
               </TouchableOpacity>
@@ -113,13 +118,8 @@ export default class ProfileScreen extends Component {
             />
             <Interests
               isEditMode={isEditMode}
-              interests={[
-                'art & design',
-                'music',
-                'politics',
-                'computer science',
-                'health & fitness',
-              ]}
+              interests={[]}
+              style={{ marginBottom: 64 }}
             />
           </Animated.ScrollView>
         </KeyboardAvoidingView>

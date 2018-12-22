@@ -4,8 +4,8 @@ import Flex from '../interface/Flex'
 import Text from '../interface/Text'
 import { COLORS } from '../interface/constants'
 
-const SectionTitle = ({ text, rightChild }) => (
-  <Flex row spaceBetween style={styles.container}>
+const SectionTitle = ({ text, rightChild, style }) => (
+  <Flex row spaceBetween style={[styles.container, style]}>
     <Text size="title" bold>
       {text}
     </Text>

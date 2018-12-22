@@ -36,8 +36,8 @@ export default class About extends Component {
         {isEditMode ? (
           <TextInput
             multiline={true}
-            numberOfLines={7}
-            onChangeText={this.handleChangText}
+            onChangeText={this.handleChangeText}
+            placeholder="write something about yourself!"
             value={value}
             style={{ paddingTop: 12 }}
           />
@@ -48,7 +48,7 @@ export default class About extends Component {
     )
   }
 
-  handleChangText = value => this.setState({ value })
+  handleChangeText = value => this.setState({ value })
 }
 
 const styles = StyleSheet.create({

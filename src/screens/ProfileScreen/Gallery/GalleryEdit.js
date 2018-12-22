@@ -210,12 +210,12 @@ export default class GalleryEdit extends Component {
             <TouchableOpacity hitSlop={DELETE_HIT_SLOP}>
               <Icon
                 circle
-                backgroundColor={COLORS.lightGrey}
                 name="ios-close"
                 size={16}
                 style={{
-                  width: 16,
+                  backgroundColor: COLORS.lightGrey,
                   height: 16,
+                  width: 16,
                 }}
               />
             </TouchableOpacity>

@@ -3,8 +3,6 @@ import { StyleSheet, Animated, Easing } from 'react-native'
 import Flex from '../interface/Flex'
 import Text from '../interface/Text'
 
-MINIMUM_OPEN_DURATION = 1000
-
 export default class LoadingIndicator extends Component {
   static defaultProps = {
     text: 'loading',
@@ -22,12 +20,10 @@ export default class LoadingIndicator extends Component {
       text: props.text,
     }
     this.animationDuration = 300
-    this.openTimestamp = null
   }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.isOpen && nextProps.isOpen) {
-      this.openTimestamp = +new Date()
       this.setState({ text: nextProps.text, shouldRender: true })
       this.openIndicator()
     }

@@ -4,16 +4,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from './constants'
 import Flex from './Flex'
 
-const Icon = ({ name, color, size, circle, backgroundColor, style }) => {
-  const children = <Ionicons name={name} size={size} color={color} />
-  return circle ? (
-    <Flex center style={[styles.circle, { backgroundColor }, style]}>
-      {children}
-    </Flex>
-  ) : (
-    children
-  )
-}
+const Icon = ({ name, color, size, circle, style }) => (
+  <Flex center style={[circle ? styles.circle : {}, style]}>
+    <Ionicons name={name} size={size} color={color} />
+  </Flex>
+)
 
 const styles = StyleSheet.create({
   circle: {

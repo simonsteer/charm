@@ -38,9 +38,12 @@ const Header = ({
         <TouchableOpacity onPress={routeBack}>
           <Icon
             circle
-            backgroundColor={COLORS.black}
             color={COLORS.white}
-            style={{ paddingRight: 2, paddingTop: 2 }}
+            style={{
+              backgroundColor: COLORS.black,
+              paddingRight: 2,
+              paddingTop: 2,
+            }}
           />
         </TouchableOpacity>
       )}
