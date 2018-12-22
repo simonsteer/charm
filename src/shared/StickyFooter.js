@@ -14,8 +14,7 @@ const StickyFooter = ({ children, style }) => (
         bottom: 0,
         left: 0,
         right: 0,
-        paddingBottom: IPHONE_X_SAFE_BOTTOM_PADDING + 16,
-        paddingHorizontal: 16,
+        paddingBottom: IPHONE_X_SAFE_BOTTOM_PADDING,
       },
       style,
     ]}
