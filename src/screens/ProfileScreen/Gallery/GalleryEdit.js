@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Animated,
   Easing,
+  Alert,
 } from 'react-native'
 import range from 'lodash/range'
 import Flex from '../../../interface/Flex'
@@ -193,6 +194,23 @@ export default class GalleryEdit extends Component {
     })
   }
 
+  handlePressDelete = () => {
+    const { currentIndex } = this.props
+    Alert.alert(
+      'Delete Image',
+      'Are you sure you want to delete this image?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('CANCELING IMAGE DELETION'),
+          style: 'cancel',
+        },
+        { text: 'Yes, Delete', onPress: () => console.log('DELETING IMAGE') },
+      ],
+      { cancelable: false }
+    )
+  }
+
   renderImageOptions = (index, isSelected) => {
     const { currentIndex, isAnimating } = this.state
 
@@ -207,7 +225,10 @@ export default class GalleryEdit extends Component {
               right: -9,
             }}
           >
-            <TouchableOpacity hitSlop={DELETE_HIT_SLOP}>
+            <TouchableOpacity
+              onPress={this.handlePressDelete}
+              hitSlop={DELETE_HIT_SLOP}
+            >
               <Icon
                 circle
                 name="ios-close"

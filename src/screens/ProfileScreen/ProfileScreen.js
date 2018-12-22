@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Animated,
-  View,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from 'react-native'
+import { StyleSheet, Animated, KeyboardAvoidingView } from 'react-native'
+import { COLORS, IPHONE_X_SAFE_BOTTOM_PADDING } from '../../interface/constants'
 import { config } from '../../interface/utils'
 import Screen from '../../interface/Screen'
-import Header from '../../interface/Header'
-import Text from '../../interface/Text'
-import Flex from '../../interface/Flex'
-import Icon from '../../interface/Icon'
-import TextInput from '../../interface/TextInput'
-import { COLORS, IPHONE_X_SAFE_BOTTOM_PADDING } from '../../interface/constants'
 import Gallery from './Gallery'
 import About from './About'
 import Interests from './Interests'
+import MessageMeIf from './MessageMeIf'
+import SendMessageButton from './SendMessageButton'
+import ProfileScreenHeader from './ProfileScreenHeader'
 
 export default class ProfileScreen extends Component {
   static defaultProps = {
@@ -41,46 +33,15 @@ export default class ProfileScreen extends Component {
 
     return (
       <Screen
-        color={COLORS.white}
+        color={COLORS.lightGrey}
         center
         header={
-          <Header
-            border
-            header={
-              isEditMode ? (
-                <TextInput
-                  onChangeText={this.handleChangeDisplayNameText}
-                  placeholder="display name"
-                  style={{
-                    width: config.deviceWidth / 2,
-                    fontSize: 20,
-                    letterSpacing: 0.75,
-                    textAlign: 'center',
-                    fontWeight: '700',
-                  }}
-                  value={displayNameValue}
-                />
-              ) : (
-                displayNameValue
-              )
-            }
-            rightChild={
-              <TouchableOpacity onPress={this.handlePressHeaderRightChild}>
-                <Icon
-                  circle
-                  color={COLORS.white}
-                  name={isEditMode ? 'ios-save' : 'md-create'}
-                  style={{
-                    paddingTop: 1,
-                    paddingLeft: 1,
-                    backgroundColor: COLORS.black,
-                  }}
-                  size={20}
-                />
-              </TouchableOpacity>
-            }
+          <ProfileScreenHeader
+            isEditMode={isEditMode}
+            onPressHeaderRightChild={this.handlePressHeaderRightChild}
           />
         }
+        stickyFooterComponent={!isEditMode && <SendMessageButton />}
         useBottomPadding={false}
       >
         <KeyboardAvoidingView
@@ -118,8 +79,23 @@ export default class ProfileScreen extends Component {
             />
             <Interests
               isEditMode={isEditMode}
-              interests={[]}
-              style={{ marginBottom: 64 }}
+              interests={[
+                'kayaking',
+                'tennis',
+                'graphic design',
+                'weight lifting',
+                'health & fitness',
+                'horror movies',
+                'computer science',
+                'drag',
+                'house music',
+              ]}
+              style={{ marginBottom: 24 }}
+            />
+            <MessageMeIf
+              isEditMode={isEditMode}
+              text={`Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore `}
+              style={{ marginBottom: 160 }}
             />
           </Animated.ScrollView>
         </KeyboardAvoidingView>
@@ -134,9 +110,6 @@ export default class ProfileScreen extends Component {
       extrapolateRight: 'clamp',
     })
   }
-
-  handleChangeDisplayNameText = displayNameValue =>
-    this.setState({ displayNameValue })
 
   handlePressHeaderRightChild = () => {
     const { isEditMode } = this.state

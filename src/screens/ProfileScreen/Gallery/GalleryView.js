@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Image, FlatList, View, StyleSheet } from 'react-native'
 import range from 'lodash/range'
 import { LinearGradient } from 'expo'
@@ -26,26 +26,42 @@ export default class GalleryView extends Component {
       state: { currentIndex },
     } = this
 
+    const shouldShowImages = images.length > 0
+
     return (
-      <View>
-        <FlatList
-          horizontal
-          data={images}
-          decelerationRate="fast"
-          keyExtractor={(item, index) => `gallery-view-image-${index}`}
-          onViewableItemsChanged={this.handleViewableItemsChanged}
-          renderItem={({ item, index }) => (
-            <Image
-              resizeMode="contain"
-              style={{ aspectRatio: 1, width: config.deviceWidth }}
-              source={{ uri: item }}
-            />
-          )}
-          showsHorizontalScrollIndicator={false}
-          snapToInterval={config.deviceWidth}
-          style={styles.gallery}
-          viewabilityConfig={this.viewabilityConfig}
-        />
+      <Flex
+        center
+        style={{
+          width: config.deviceWidth,
+          height: config.deviceWidth,
+          backgroundColor: COLORS.black,
+        }}
+      >
+        {shouldShowImages ? (
+          <FlatList
+            horizontal
+            data={images}
+            decelerationRate="fast"
+            keyExtractor={(item, index) => `gallery-view-image-${index}`}
+            onViewableItemsChanged={this.handleViewableItemsChanged}
+            renderItem={({ item, index }) => (
+              <Image
+                resizeMode="contain"
+                style={{ aspectRatio: 1, width: config.deviceWidth }}
+                source={{ uri: item }}
+              />
+            )}
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={config.deviceWidth}
+            viewabilityConfig={this.viewabilityConfig}
+          />
+        ) : (
+          <Icon
+            name="ios-contact"
+            color={COLORS.darkGrey}
+            size={config.deviceWidth / 3}
+          />
+        )}
         <Flex center row pointerEvents="none" style={styles.dotContainer}>
           {this.renderDots()}
         </Flex>
@@ -66,27 +82,20 @@ export default class GalleryView extends Component {
               width: config.deviceWidth,
             }}
             row
-            spaceBetween
+            justifyEnd
             alignEnd
           >
             <Pill
-              onPress={() => {}}
-              color={COLORS.white}
-              text=" send message"
-              textColor="black"
-              leftChild={<Icon name="ios-mail" size={16} />}
-            />
-            <Pill
-              color={COLORS.white}
+              color={COLORS.pink}
               text="87% "
-              textColor="pink"
+              textColor="white"
               rightChild={
-                <Icon name="ios-heart" size={13} color={COLORS.pink} />
+                <Icon name="ios-heart" size={13} color={COLORS.white} />
               }
             />
           </Flex>
         </LinearGradient>
-      </View>
+      </Flex>
     )
   }
 
@@ -100,6 +109,10 @@ export default class GalleryView extends Component {
       props: { images },
       state: { currentIndex },
     } = this
+
+    if (images.length <= 1) {
+      return null
+    }
 
     return range(images.length).map(index => (
       <View
@@ -131,5 +144,4 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.white,
   },
-  gallery: { backgroundColor: COLORS.black },
 })

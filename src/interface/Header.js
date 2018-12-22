@@ -40,7 +40,7 @@ const Header = ({
             circle
             color={COLORS.white}
             style={{
-              backgroundColor: COLORS.black,
+              backgroundColor: COLORS.pink,
               paddingRight: 2,
               paddingTop: 2,
             }}

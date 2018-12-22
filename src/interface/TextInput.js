@@ -45,7 +45,7 @@ export default class TextInput extends Component {
             borderColor: isFocused ? COLORS.black : 'rgba(0, 0, 0, 0.3)',
           },
         ]}
-        selectionColor={COLORS.yellow}
+        selectionColor={COLORS.pink}
         onChangeText={this.handleChangeText}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}

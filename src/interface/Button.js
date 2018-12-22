@@ -4,7 +4,17 @@ import Flex from './Flex'
 import Text from './Text'
 import { COLORS } from './constants'
 
-const Button = ({ onPress, size, style, disabled, color, children }) => {
+const Button = ({
+  onPress,
+  size,
+  style,
+  disabled,
+  color,
+  children,
+  animated,
+  rightChild,
+  leftChild,
+}) => {
   const textColor = BUTTON_TEXT_COLORS[disabled ? 'disabled' : color] || 'black'
 
   const buttonStyle = {
@@ -14,10 +24,12 @@ const Button = ({ onPress, size, style, disabled, color, children }) => {
   }
 
   const button = (
-    <Flex row center style={[buttonStyle, style]}>
+    <Flex animated={animated} row center style={[buttonStyle, style]}>
+      {!!leftChild && leftChild}
       <Text bold size={size} color={textColor}>
         {children.toUpperCase()}
       </Text>
+      {!!rightChild && rightChild}
     </Flex>
   )
 
@@ -32,9 +44,10 @@ Button.defaultProps = {
   onPress() {},
   size: 'medium',
   style: {},
-  color: 'yellow',
+  color: 'white',
   disabled: false,
   children: null,
+  animated: false,
 }
 
 export default Button
@@ -43,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: 'rgba(0, 0, 0, 0.3)',
   },
   small: { paddingVertical: 12, paddingHorizontal: 20 },
   medium: { paddingVertical: 16, paddingHorizontal: 24 },
@@ -56,4 +69,5 @@ const BUTTON_TEXT_COLORS = {
   disabled: 'mediumGrey',
   white: 'darkGrey',
   yellow: 'darkGrey',
+  pink: 'white',
 }

@@ -48,15 +48,15 @@ export default class InterestFinder extends Component {
             {interestsToDisplay.map(({ interest }, index) => (
               <Pill
                 onPress={() => addInterest(interest)}
-                color={COLORS.lightGrey}
+                color="transparent"
                 textColor={COLORS.darkGrey}
                 key={`interest-${index}`}
                 rightChild={
                   <Icon
-                    color={COLORS.darkGrey}
+                    color={COLORS.black}
                     name="ios-add-circle"
                     size={14}
-                    style={{ paddingLeft: 8 }}
+                    style={{ paddingLeft: 8, paddingTop: 2 }}
                   />
                 }
                 style={{
@@ -72,8 +72,8 @@ export default class InterestFinder extends Component {
             center
             style={{ paddingHorizontal: 16, marginBottom: 16, height: 36 }}
           >
-            <Text bold center color="mediumGrey">
-              search results will appear here
+            <Text bold center color="darkGrey" letterSpacing={1.5} size="small">
+              SEARCH RESULTS WILL APPEAR HERE
             </Text>
           </Flex>
         )}

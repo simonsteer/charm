@@ -16,6 +16,7 @@ const Flex = ({
   spaceAround,
   selfStretch,
   animated,
+  ...restProps
 }) => {
   const appliedStyles = [
     { flex },
@@ -34,7 +35,11 @@ const Flex = ({
 
   const Shell = animated ? Animated.View : View
 
-  return <Shell style={appliedStyles}>{children}</Shell>
+  return (
+    <Shell style={appliedStyles} {...restProps}>
+      {children}
+    </Shell>
+  )
 }
 
 Flex.defaultProps = {

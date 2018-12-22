@@ -3,6 +3,7 @@ import { Animated, View, StyleSheet } from 'react-native'
 import Flex from '../../interface/Flex'
 import Icon from '../../interface/Icon'
 import Pill from '../../interface/Pill'
+import Text from '../../interface/Text'
 import SectionTitle from '../../shared/SectionTitle'
 import { COLORS } from '../../interface/constants'
 import InterestFinder from './InterestFinder'
@@ -22,12 +23,14 @@ export default class Interests extends Component {
       state: { interests },
     } = this
 
+    const shouldShowInterestsEducation = interests.length === 0 && isEditMode
+
     return (
       <View style={[styles.container, { width: config.deviceWidth }, style]}>
         <SectionTitle
-          text="My Interests"
+          text="My interests"
           rightChild={<Icon name="ios-book" />}
-          style={{ marginHorizontal: 16 }}
+          style={[{ marginHorizontal: 16 }, style]}
         />
         {!!isEditMode && (
           <InterestFinder
@@ -43,6 +46,7 @@ export default class Interests extends Component {
         >
           {interests.map((interest, index) => (
             <Pill
+              color={COLORS.mediumGrey}
               key={`interest-${index}`}
               onPress={isEditMode ? () => this.removeInterest(interest) : null}
               rightChild={
@@ -62,6 +66,19 @@ export default class Interests extends Component {
               text={interest}
             />
           ))}
+          {shouldShowInterestsEducation && (
+            <Text
+              bold
+              center
+              color="darkGrey"
+              size="small"
+              style={{ paddingHorizontal: 32 }}
+              lineHeight={18}
+            >
+              Add some interests to your profile! Interests are used to estimate
+              match probability with other people.
+            </Text>
+          )}
         </Flex>
       </View>
     )

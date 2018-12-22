@@ -51,7 +51,7 @@ export default class HomeScreen extends Component {
     const CONTENT_WIDTH = this.deviceWidth - 80
 
     return (
-      <Screen>
+      <Screen color={COLORS.lightGrey}>
         <KeyboardAvoidingView
           behavior="position"
           contentContainerStyle={{ height: '100%' }}
@@ -65,12 +65,14 @@ export default class HomeScreen extends Component {
                 {!isSignupFlowActive && !isLoginFlowActive ? (
                   <Fragment>
                     <Button
+                      color="pink"
                       onPress={this.goToSignupFlow}
                       style={{ width: CONTENT_WIDTH }}
                     >
                       signup
                     </Button>
                     <Button
+                      color="pink"
                       onPress={this.goToLoginFlow}
                       style={{ marginTop: 16, width: CONTENT_WIDTH }}
                     >
@@ -113,6 +115,7 @@ export default class HomeScreen extends Component {
                       onChangeText={text => this.onChangeText(text, 'password')}
                       placeholder="password"
                       style={{ width: CONTENT_WIDTH, marginBottom: 16 }}
+                      onSubmitEditing={this.handlePressLogin}
                     />
                     <Flex
                       style={{ width: CONTENT_WIDTH, marginTop: 16 }}
@@ -120,14 +123,13 @@ export default class HomeScreen extends Component {
                       spaceBetween
                     >
                       <Button
-                        color="white"
                         style={{ width: CONTENT_WIDTH / 2 - 8 }}
                         onPress={this.returnToMainFlow}
                       >
                         back
                       </Button>
                       <Button
-                        color="yellow"
+                        color="pink"
                         disabled={
                           !email || !password || !emailPattern.test(email)
                         }
