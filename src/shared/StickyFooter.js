@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import Flex from '../interface/Flex'
 import { IPHONE_X_SAFE_BOTTOM_PADDING } from '../interface/constants'
-import { config } from '../interface/utils'
 
 const StickyFooter = ({ children, style }) => (
   <Flex
