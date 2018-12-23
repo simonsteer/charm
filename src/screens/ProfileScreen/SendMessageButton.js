@@ -26,7 +26,7 @@ SendMessageButton.defaultProps = {
 const styles = StyleSheet.create({
   container: { padding: 16 },
   button: {
-    shadowOffset: { height: 12 },
+    shadowOffset: { height: 8 },
     shadowColor: COLORS.black,
     shadowRadius: 8,
     shadowOpacity: 0.3,
