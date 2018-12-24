@@ -1,4 +1,5 @@
 import { Constants } from 'expo'
+import { StyleSheet } from 'react-native'
 import { config } from './utils'
 
 export const COLORS = {
@@ -27,3 +28,12 @@ export const getApiUrl = () => {
 }
 
 export const IPHONE_X_SAFE_BOTTOM_PADDING = config.isIphoneX ? 34 : 0
+
+export const interfaceStyles = StyleSheet.create({
+  shadow: {
+    shadowOffset: { height: 8 },
+    shadowColor: COLORS.black,
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
+  },
+})

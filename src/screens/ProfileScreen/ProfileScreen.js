@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Animated, KeyboardAvoidingView } from 'react-native'
+import { connect } from 'react-redux'
 import { COLORS, IPHONE_X_SAFE_BOTTOM_PADDING } from '../../interface/constants'
 import { config } from '../../interface/utils'
 import Screen from '../../interface/Screen'
@@ -9,10 +10,20 @@ import Interests from './Interests'
 import MessageMeIf from './MessageMeIf'
 import SendMessageButton from './SendMessageButton'
 import ProfileScreenHeader from './ProfileScreenHeader'
+import { routeTo } from '../../actions/navigation'
 
+const mapDispatchToProps = {
+  routeToUserMessages: userId => routeTo('UserMessages', { userId }),
+}
+
+@connect(
+  null,
+  mapDispatchToProps
+)
 export default class ProfileScreen extends Component {
   static defaultProps = {
     displayName: '',
+    routeToUserMessages() {},
   }
 
   constructor(props) {
@@ -29,7 +40,10 @@ export default class ProfileScreen extends Component {
   }
 
   render() {
-    const { isEditMode, displayNameValue } = this.state
+    const {
+      state: { isEditMode, displayNameValue },
+      props: { routeToUserMessages },
+    } = this
 
     return (
       <Screen
@@ -41,7 +55,11 @@ export default class ProfileScreen extends Component {
             onPressHeaderRightChild={this.handlePressHeaderRightChild}
           />
         }
-        stickyFooterComponent={!isEditMode && <SendMessageButton />}
+        stickyFooterComponent={
+          !isEditMode && (
+            <SendMessageButton routeToUserMessages={routeToUserMessages} />
+          )
+        }
         useBottomPadding={false}
       >
         <KeyboardAvoidingView

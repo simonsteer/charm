@@ -1,11 +1,16 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import MessagesHomeScreen from '../screens/MessagesHomeScreen'
+import UserMessagesScreen from '../screens/UserMessagesScreen'
+import { create } from 'uuid-js'
 
 const MainStack = createStackNavigator(
   {
     Home: HomeScreen,
     Profile: ProfileScreen,
+    MessagesHome: MessagesHomeScreen,
+    UserMessages: UserMessagesScreen,
   },
   {
     headerMode: 'none',

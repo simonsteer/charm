@@ -6,23 +6,39 @@ import {
   getLoadingIndicator,
   getAlert,
 } from '../selectors/navigation'
-import { routeTo } from '../actions/navigation'
+import { routeTo, closeAlert, openActionSheet } from '../actions/navigation'
 import { setTopLevelNavigator } from './navigationService'
 import LoadingIndicator from './LoadingIndicator'
+import AlertRouter from './AlertRouter'
 
 const mapStateToProps = state => ({
   navigation: getNavigation(state),
   loadingIndicator: getLoadingIndicator(state),
   alert: getAlert(state),
 })
-@connect(mapStateToProps)
+
+const mapDispatchToProps = {
+  routeTo,
+  closeAlert,
+}
+
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 export default class Charm extends Component {
   componentDidMount() {
-    this.props.dispatch(routeTo('Profile'))
+    this.props.routeTo('Profile')
   }
 
   render() {
-    const { navigation, dispatch, alert, loadingIndicator } = this.props
+    const {
+      navigation,
+      dispatch,
+      alert,
+      loadingIndicator,
+      closeAlert,
+    } = this.props
 
     return (
       <Fragment>
@@ -32,6 +48,7 @@ export default class Charm extends Component {
           dispatch={dispatch}
         />
         <LoadingIndicator {...loadingIndicator} />
+        <AlertRouter alert={alert} closeAlert={closeAlert} />
       </Fragment>
     )
   }

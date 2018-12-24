@@ -24,7 +24,12 @@ const Button = ({
   }
 
   const button = (
-    <Flex animated={animated} row center style={[buttonStyle, style]}>
+    <Flex
+      animated={animated}
+      row
+      center
+      style={[buttonStyle, color === 'white' && styles.border, style]}
+    >
       {!!leftChild && leftChild}
       <Text bold size={size} color={textColor}>
         {children.toUpperCase()}
@@ -55,6 +60,8 @@ export default Button
 const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
+  },
+  border: {
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(0, 0, 0, 0.3)',
   },

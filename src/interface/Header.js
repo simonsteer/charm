@@ -5,16 +5,18 @@ import Flex from './Flex'
 import Text from './Text'
 import Icon from './Icon'
 import { COLORS } from './constants'
-import { routeBack } from '../actions/navigation'
+import { routeBack, openActionSheet } from '../actions/navigation'
 import { config } from './utils'
 
 const Header = ({
   leftChild,
   rightChild,
-  header,
-  routeBack,
+  heading,
   color,
   border,
+  moreOptions,
+  openActionSheet,
+  routeBack,
 }) => (
   <Flex
     row
@@ -48,17 +50,32 @@ const Header = ({
         </TouchableOpacity>
       )}
     </Flex>
-    {!!header &&
-      (typeof header === 'string' ? (
+    {!!heading &&
+      (typeof heading === 'string' ? (
         <Text bold size="title">
-          {header}
+          {heading}
         </Text>
       ) : (
-        header
+        heading
       ))}
 
     <Flex center style={styles.rightChild}>
-      {rightChild}
+      {moreOptions ? (
+        <TouchableOpacity onPress={() => openActionSheet(moreOptions)}>
+          <Icon
+            name="md-more"
+            circle
+            color={COLORS.white}
+            style={{
+              backgroundColor: COLORS.pink,
+              paddingTop: 2,
+              paddingLeft: 1,
+            }}
+          />
+        </TouchableOpacity>
+      ) : (
+        rightChild
+      )}
     </Flex>
   </Flex>
 )
@@ -66,13 +83,15 @@ const Header = ({
 Header.defaultProps = {
   leftChild: null,
   rightChild: null,
-  header: null,
+  moreOptions: null,
+  heading: null,
   routeBack() {},
   color: 'transparent',
-  border: false,
+  border: true,
 }
 
 const mapDispatchToProps = {
+  openActionSheet,
   routeBack,
 }
 

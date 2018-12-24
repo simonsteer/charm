@@ -88,7 +88,7 @@ export default class LoadingIndicator extends Component {
     })
   }
 
-  indicateResult = ({ text, success }) => {
+  indicateResult = ({ text, success }) =>
     Animated.timing(this.state.contentValue, {
       toValue: 0,
       duration: 200,
@@ -99,7 +99,6 @@ export default class LoadingIndicator extends Component {
         duration: 200,
       }).start(this.closeIndicator)
     })
-  }
 
   openIndicator = () =>
     Animated.parallel([

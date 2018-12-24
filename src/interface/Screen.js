@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { View, Dimensions, Platform } from 'react-native'
 import Flex from './Flex'
 import { config } from './utils'
-import { IPHONE_X_SAFE_BOTTOM_PADDING } from './constants'
+import { IPHONE_X_SAFE_BOTTOM_PADDING, interfaceStyles } from './constants'
 import StickyFooter from '../shared/StickyFooter'
 
 const Screen = ({
@@ -15,13 +15,16 @@ const Screen = ({
 }) => (
   <Fragment>
     <View
-      style={{
-        width: Dimensions.get('window').width,
-        flex: 1,
-        paddingTop: config.isIphoneX ? 44 : 0,
-        paddingBottom: useBottomPadding ? IPHONE_X_SAFE_BOTTOM_PADDING : 0,
-        backgroundColor: color,
-      }}
+      style={[
+        {
+          width: Dimensions.get('window').width,
+          flex: 1,
+          paddingTop: config.isIphoneX ? 44 : 0,
+          paddingBottom: useBottomPadding ? IPHONE_X_SAFE_BOTTOM_PADDING : 0,
+          backgroundColor: color,
+        },
+        interfaceStyles.shadow,
+      ]}
     >
       <Flex
         flex={1}

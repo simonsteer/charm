@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Animated } from 'react-native'
+import { View, Animated, TouchableWithoutFeedback } from 'react-native'
 
 const Flex = ({
   style,
@@ -16,6 +16,7 @@ const Flex = ({
   spaceAround,
   selfStretch,
   animated,
+  onPress,
   ...restProps
 }) => {
   const appliedStyles = [
@@ -35,10 +36,18 @@ const Flex = ({
 
   const Shell = animated ? Animated.View : View
 
-  return (
+  const renderedChildren = (
     <Shell style={appliedStyles} {...restProps}>
       {children}
     </Shell>
+  )
+
+  return onPress ? (
+    <TouchableWithoutFeedback onPress={onPress}>
+      {renderedChildren}
+    </TouchableWithoutFeedback>
+  ) : (
+    renderedChildren
   )
 }
 
@@ -51,6 +60,7 @@ Flex.defaultProps = {
   style: {},
   flex: null,
   animated: false,
+  onPress: null,
 }
 
 export default Flex

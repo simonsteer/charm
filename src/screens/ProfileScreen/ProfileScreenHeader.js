@@ -22,6 +22,22 @@ import StickyFooter from '../../shared/StickyFooter'
 import Button from '../../interface/Button'
 import SendMessageButton from './SendMessageButton'
 
+const moreOptions =
+  [
+    {
+      title: 'Block user',
+      onPress: () => console.log('BLOCKING USER'),
+    },
+    {
+      title: 'Mute user',
+      onPress: () => console.log('MUTING USER'),
+    },
+    {
+      title: 'Hide user',
+      onPress: () => console.log('HIDING USER'),
+    },
+  ] && false
+
 export default class ProfileScreenHeader extends Component {
   static defaultProps = {
     displayName: '',
@@ -44,8 +60,8 @@ export default class ProfileScreenHeader extends Component {
 
     return (
       <Header
-        border
-        header={
+        color={COLORS.white}
+        heading={
           isEditMode ? (
             <TextInput
               onChangeText={this.handleChangeDisplayNameText}
@@ -78,6 +94,7 @@ export default class ProfileScreenHeader extends Component {
             />
           </TouchableOpacity>
         }
+        moreOptions={moreOptions}
       />
     )
   }

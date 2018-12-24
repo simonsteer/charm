@@ -1,18 +1,19 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { COLORS } from '../../interface/constants'
+import { COLORS, interfaceStyles } from '../../interface/constants'
 import Icon from '../../interface/Icon'
 import Button from '../../interface/Button'
+import { config } from '../../interface/utils'
 
-const SendMessageButton = ({ onPress }) => (
+const SendMessageButton = ({ routeToUserMessages }) => (
   <View style={styles.container}>
     <Button
       color="pink"
-      onPress={onPress}
+      onPress={routeToUserMessages}
       rightChild={
         <Icon name="ios-mail" color={COLORS.white} style={styles.icon} />
       }
-      style={styles.button}
+      style={[interfaceStyles.shadow, { elevation: 4 }]}
     >
       send message
     </Button>
@@ -25,12 +26,6 @@ SendMessageButton.defaultProps = {
 
 const styles = StyleSheet.create({
   container: { padding: 16 },
-  button: {
-    shadowOffset: { height: 8 },
-    shadowColor: COLORS.black,
-    shadowRadius: 8,
-    shadowOpacity: 0.3,
-  },
   icon: { paddingTop: 2, marginLeft: 8 },
 })
 

@@ -3,9 +3,9 @@ import u from 'updeep'
 
 const initialState = {
   alert: {
-    isOpen: false,
+    isClosing: false,
     name: null,
-    props: {},
+    params: {},
   },
   loadingIndicator: {
     isOpen: false,
@@ -24,6 +24,18 @@ const overlayReducer = (state = initialState, action) => {
 
     case 'CLOSE_LOADING_INDICATOR': {
       return u({ loadingIndicator: { isOpen: false, ...payload } }, state)
+    }
+
+    case 'OPEN_ALERT': {
+      return u({ alert: { ...payload } }, state)
+    }
+
+    case 'START_CLOSE_ALERT': {
+      return u({ alert: { isClosing: true } }, state)
+    }
+
+    case 'END_CLOSE_ALERT': {
+      return u({ alert: { isClosing: false, name: null, params: {} } }, state)
     }
 
     default:
