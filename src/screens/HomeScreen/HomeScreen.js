@@ -51,7 +51,7 @@ export default class HomeScreen extends Component {
     const CONTENT_WIDTH = this.deviceWidth - 80
 
     return (
-      <Screen color={COLORS.lightGrey}>
+      <Screen>
         <KeyboardAvoidingView
           behavior="position"
           contentContainerStyle={{ height: '100%' }}
