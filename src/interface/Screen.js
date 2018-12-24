@@ -2,7 +2,11 @@ import React, { Fragment } from 'react'
 import { View, Dimensions, Platform } from 'react-native'
 import Flex from './Flex'
 import { config } from './utils'
-import { IPHONE_X_SAFE_BOTTOM_PADDING, interfaceStyles } from './constants'
+import {
+  IPHONE_X_SAFE_BOTTOM_PADDING,
+  interfaceStyles,
+  COLORS,
+} from './constants'
 import StickyFooter from '../shared/StickyFooter'
 
 const Screen = ({
@@ -47,7 +51,7 @@ const Screen = ({
 Screen.defaultProps = {
   center: false,
   children: null,
-  color: 'white',
+  color: COLORS.white,
   useBottomPadding: true,
 }
 

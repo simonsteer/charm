@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, Animated, KeyboardAvoidingView } from 'react-native'
+import {
+  StyleSheet,
+  Animated,
+  FlatList,
+  KeyboardAvoidingView,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { COLORS, IPHONE_X_SAFE_BOTTOM_PADDING } from '../../interface/constants'
 import { config } from '../../interface/utils'
@@ -11,6 +16,8 @@ import MessageMeIf from './MessageMeIf'
 import SendMessageButton from './SendMessageButton'
 import ProfileScreenHeader from './ProfileScreenHeader'
 import { routeTo } from '../../actions/navigation'
+
+const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList)
 
 const mapDispatchToProps = {
   routeToUserMessages: userId => routeTo('UserMessages', { userId }),
@@ -31,23 +38,25 @@ export default class ProfileScreen extends Component {
     this.state = {
       isEditMode: false,
       displayNameValue: props.displayName,
+      scrollValue: new Animated.Value(0),
+      // TODO: FIND BETTER SOLUTION TO HANDLE KEYBOARD APPEARANCE ON IOS
+      // https://github.com/APSL/react-native-keyboard-aware-scroll-view
+      flatlistPaddingBottom: 0,
     }
-    this.scrollValue = new Animated.Value(0)
     this.onScrollEvent = Animated.event(
-      [{ nativeEvent: { contentOffset: { y: this.scrollValue } } }],
+      [{ nativeEvent: { contentOffset: { y: this.state.scrollValue } } }],
       { useNativeDriver: true }
     )
   }
 
   render() {
     const {
-      state: { isEditMode, displayNameValue },
+      state: { isEditMode, displayNameValue, flatlistPaddingBottom },
       props: { routeToUserMessages },
     } = this
 
     return (
       <Screen
-        color={COLORS.lightGrey}
         center
         header={
           <ProfileScreenHeader
@@ -63,66 +72,102 @@ export default class ProfileScreen extends Component {
         useBottomPadding={false}
       >
         <KeyboardAvoidingView
-          behavior="padding"
-          contentContainerStyle={{ height: '100%' }}
+          behavior={config.isAndroid ? 'padding' : null}
+          keyboardVerticalOffset={config.isAndroid ? 16 : 0}
         >
-          <Animated.ScrollView
+          <AnimatedFlatlist
+            contentContainerStyle={{ paddingBottom: flatlistPaddingBottom }}
+            data={this.data}
+            keyExtractor={item => `profile-${item.section}-section`}
             onScroll={this.onScrollEvent}
+            renderItem={this.renderProfileSections}
             scrollEventThrottle={14}
             style={[
               styles.scrollview,
               { paddingBottom: IPHONE_X_SAFE_BOTTOM_PADDING },
             ]}
-          >
-            <Animated.View
-              style={{
-                transform: [{ translateY: this.displayImageTranslateY }],
-              }}
-            >
-              <Gallery
-                isEditMode={isEditMode}
-                images={[
-                  'https://picsum.photos/400/700',
-                  'https://picsum.photos/400/500',
-                  'https://picsum.photos/600/600',
-                  'https://picsum.photos/450/700',
-                  'https://picsum.photos/350/250',
-                  'https://picsum.photos/500/500',
-                ]}
-              />
-            </Animated.View>
-            <About
-              isEditMode={isEditMode}
-              text={`Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore `}
-            />
-            <Interests
-              isEditMode={isEditMode}
-              interests={[
-                'kayaking',
-                'tennis',
-                'graphic design',
-                'weight lifting',
-                'health & fitness',
-                'horror movies',
-                'computer science',
-                'drag',
-                'house music',
-              ]}
-              style={{ marginBottom: 24 }}
-            />
-            <MessageMeIf
-              isEditMode={isEditMode}
-              text={`Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore `}
-              style={{ marginBottom: 160 }}
-            />
-          </Animated.ScrollView>
+          />
         </KeyboardAvoidingView>
       </Screen>
     )
   }
 
+  get data() {
+    return [
+      {
+        section: 'GALLERY',
+        data: [
+          'https://picsum.photos/400/700',
+          'https://picsum.photos/400/500',
+          'https://picsum.photos/600/600',
+          'https://picsum.photos/450/700',
+          'https://picsum.photos/350/250',
+          'https://picsum.photos/500/500',
+        ],
+      },
+      {
+        section: 'ABOUT',
+        data: '',
+      },
+      {
+        section: 'INTERESTS',
+        data: [],
+      },
+      {
+        section: 'MESSAGE_ME_IF',
+        data: '',
+      },
+    ]
+  }
+
+  renderProfileSections = ({ item: { section, data }, index }) => {
+    const { isEditMode } = this.state
+
+    if (section === 'GALLERY') {
+      return (
+        <Animated.View
+          style={{
+            transform: [{ translateY: this.displayImageTranslateY }],
+          }}
+        >
+          <Gallery isEditMode={isEditMode} images={data} />
+        </Animated.View>
+      )
+    }
+
+    if (section === 'ABOUT') {
+      return <About isEditMode={isEditMode} text={data} />
+    }
+
+    if (section === 'INTERESTS') {
+      return (
+        <Interests
+          isEditMode={isEditMode}
+          interests={data}
+          style={{ marginBottom: 24 }}
+        />
+      )
+    }
+
+    if (section === 'MESSAGE_ME_IF') {
+      return (
+        <MessageMeIf
+          isEditMode={isEditMode}
+          text={data}
+          style={{ marginBottom: 160 }}
+          onFocusTextInput={() =>
+            this.setState({
+              flatlistPaddingBottom: config.isIos ? 150 : 0,
+            })
+          }
+          onBlurTextInput={() => this.setState({ flatlistPaddingBottom: 0 })}
+        />
+      )
+    }
+  }
+
   get displayImageTranslateY() {
-    return this.scrollValue.interpolate({
+    return this.state.scrollValue.interpolate({
       inputRange: [-config.deviceWidth, 0],
       outputRange: [-config.deviceWidth, 0],
       extrapolateRight: 'clamp',

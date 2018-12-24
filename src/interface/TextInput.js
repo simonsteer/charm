@@ -34,6 +34,7 @@ export default class TextInput extends Component {
 
     return (
       <RNTextInput
+        textAlignVertical="top"
         autoCorrect={false}
         autoCapitalize="none"
         placeholder={placeholder}

@@ -5,6 +5,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native'
 import range from 'lodash/range'
 import Flex from '../../interface/Flex'

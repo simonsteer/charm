@@ -1,5 +1,4 @@
 import React from 'react'
-import { COLORS } from '../../interface/constants'
 import Header from '../../interface/Header'
 import Icon from '../../interface/Icon'
 

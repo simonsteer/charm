@@ -49,7 +49,7 @@ export default class ActionSheet extends Component {
               borderRadius: 8,
               transform: [{ translateY }],
               borderWidth: StyleSheet.hairlineWidth,
-              borderColor: COLORS.white,
+              borderColor: COLORS.lightGrey,
             },
             interfaceStyles.shadow,
             config.isAndroid && { elevation: 2 },
@@ -68,10 +68,9 @@ export default class ActionSheet extends Component {
   }
 
   openAnimation = () =>
-    Animated.spring(this.state.translateY, {
+    Animated.timing(this.state.translateY, {
       toValue: 0,
-      friction: 8,
-      tension: 100,
+      duration: 150,
       useNativeDriver: true,
     }).start(() => this.setState({ hasOpened: true }))
 

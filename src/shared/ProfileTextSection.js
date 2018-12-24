@@ -14,6 +14,8 @@ export default class ProfileTextSection extends Component {
     sectionTitle: '',
     sectionIconName: 'ios-person',
     placeholderText: '',
+    onFocusTextInput() {},
+    onBlurTextInput() {},
   }
 
   constructor(props) {
@@ -32,6 +34,8 @@ export default class ProfileTextSection extends Component {
         sectionTitle,
         sectionIconName,
         placeholderText,
+        onFocusTextInput,
+        onBlurTextInput,
       },
       state: { statefulText },
     } = this
@@ -44,7 +48,9 @@ export default class ProfileTextSection extends Component {
         />
         {isEditMode ? (
           <TextInput
-            multiline={true}
+            multiline
+            onFocus={onFocusTextInput}
+            onBlur={onBlurTextInput}
             onChangeText={this.handleChangeText}
             placeholder={placeholderText}
             value={statefulText}

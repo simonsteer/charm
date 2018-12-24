@@ -68,7 +68,7 @@ export default class ProfileScreenHeader extends Component {
               placeholder="display name"
               style={{
                 width: config.deviceWidth / 2,
-                fontSize: 20,
+                fontSize: 16,
                 letterSpacing: 0.75,
                 textAlign: 'center',
                 fontWeight: '700',

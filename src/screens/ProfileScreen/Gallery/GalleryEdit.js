@@ -155,25 +155,21 @@ export default class GalleryEdit extends Component {
       Animated.timing(this.currentValue.x, {
         toValue: currentToValueX,
         duration: 300,
-        timing: Easing.elastic,
         useNativeDriver: true,
       }),
       Animated.timing(this.currentValue.y, {
         toValue: currentToValueY,
         duration: 300,
-        timing: Easing.elastic,
         useNativeDriver: true,
       }),
       Animated.timing(this.nextValue.x, {
         toValue: nextToValueX,
         duration: 300,
-        timing: Easing.elastic,
         useNativeDriver: true,
       }),
       Animated.timing(this.nextValue.y, {
         toValue: nextToValueY,
         duration: 300,
-        timing: Easing.elastic,
         useNativeDriver: true,
       }),
     ]).start(() => {

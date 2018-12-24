@@ -51,13 +51,7 @@ const Header = ({
       )}
     </Flex>
     {!!heading &&
-      (typeof heading === 'string' ? (
-        <Text bold size="title">
-          {heading}
-        </Text>
-      ) : (
-        heading
-      ))}
+      (typeof heading === 'string' ? <Text bold>{heading}</Text> : heading)}
 
     <Flex center style={styles.rightChild}>
       {moreOptions ? (
