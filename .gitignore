@@ -5,4 +5,4 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.DS_Store
-.expo
+.expo/**/*
