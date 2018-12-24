@@ -14,7 +14,7 @@ import Flex from '../../interface/Flex'
 import { COLORS } from '../../interface/constants'
 import Button from '../../interface/Button'
 import { userSignupRequest, userLoginRequest } from '../../actions/user'
-import { emailPattern } from '../../interface/utils'
+import { emailPattern, config } from '../../interface/utils'
 
 const mapDispatchToProps = {
   userSignupRequest,
@@ -55,6 +55,7 @@ export default class HomeScreen extends Component {
         <KeyboardAvoidingView
           behavior="position"
           contentContainerStyle={{ height: '100%' }}
+          keyboardVerticalOffset={config.isIos ? 16 : 0}
         >
           <Flex spaceBetween flex={1} style={{ marginVertical: 40 }}>
             <Text size="jumbo" bold center>
