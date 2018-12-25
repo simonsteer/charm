@@ -4,9 +4,9 @@ export const getNavigation = state => state.navigation
 
 export const getLoadingIndicator = state => state.overlay.loadingIndicator
 
-export const getAlert = state => state.overlay.alert
+export const getModal = state => state.overlay.modal
 
-export const getAlertIsClosing = createSelector(
-  getAlert,
-  alert => alert.isClosing
+export const getModalIsClosing = createSelector(
+  getModal,
+  modal => modal.isClosing
 )

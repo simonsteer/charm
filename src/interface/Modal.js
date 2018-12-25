@@ -2,27 +2,27 @@ import React, { Component } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import Flex from './Flex'
-import { endCloseAlert } from '../actions/navigation'
-import { getAlertIsClosing } from '../selectors/navigation'
+import { endcloseModal } from '../actions/navigation'
+import { getModalIsClosing } from '../selectors/navigation'
 import { config } from './utils'
 
 const mapStateToProps = state => ({
-  isClosing: getAlertIsClosing(state),
+  isClosing: getModalIsClosing(state),
 })
 
 const mapDispatchToProps = {
-  endCloseAlert,
+  endcloseModal,
 }
 
 @connect(
   mapStateToProps,
   mapDispatchToProps
 )
-export default class Alert extends Component {
+export default class Modal extends Component {
   static defaultProps = {
     isClosing: false,
     isDismissable: false,
-    endCloseAlert() {},
+    endcloseModal() {},
     shouldCenterChildren: true,
     shouldShowOverlay: false,
     style: {},
@@ -47,7 +47,7 @@ export default class Alert extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.isClosing && nextProps.isClosing) {
-      this.closeAlert()
+      this.closeModal()
     }
   }
 
@@ -74,15 +74,15 @@ export default class Alert extends Component {
 
   handlePressOverlay = () => {
     if (this.props.isDismissable) {
-      this.closeAlert()
+      this.closeModal()
     }
   }
 
-  closeAlert = () => {
-    const { closeAnimation, endCloseAlert } = this.props
+  closeModal = () => {
+    const { closeAnimation, endcloseModal } = this.props
 
     this.hideOverlay()
-    closeAnimation(endCloseAlert)
+    closeAnimation(endcloseModal)
   }
 
   showOverlay = () =>

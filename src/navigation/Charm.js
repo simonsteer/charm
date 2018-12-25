@@ -1,25 +1,25 @@
 import React, { Component, Fragment } from 'react'
 import AppContainer from './AppContainer'
 import { connect } from 'react-redux'
+import { setTopLevelNavigator } from './navigationService'
 import {
   getNavigation,
   getLoadingIndicator,
-  getAlert,
+  getModal,
 } from '../selectors/navigation'
-import { routeTo, closeAlert, openActionSheet } from '../actions/navigation'
-import { setTopLevelNavigator } from './navigationService'
+import { closeModal, routeTo } from '../actions/navigation'
 import LoadingIndicator from './LoadingIndicator'
-import AlertRouter from './AlertRouter'
+import ModalRouter from './ModalRouter'
 
 const mapStateToProps = state => ({
   navigation: getNavigation(state),
   loadingIndicator: getLoadingIndicator(state),
-  alert: getAlert(state),
+  modal: getModal(state),
 })
 
 const mapDispatchToProps = {
+  closeModal,
   routeTo,
-  closeAlert,
 }
 
 @connect(
@@ -28,27 +28,17 @@ const mapDispatchToProps = {
 )
 export default class Charm extends Component {
   componentDidMount() {
-    this.props.routeTo('Profile')
+    this.props.routeTo('Discover')
   }
 
   render() {
-    const {
-      navigation,
-      dispatch,
-      alert,
-      loadingIndicator,
-      closeAlert,
-    } = this.props
+    const { navigation, loadingIndicator, modal, closeModal } = this.props
 
     return (
       <Fragment>
-        <AppContainer
-          ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
-          state={navigation}
-          dispatch={dispatch}
-        />
+        <AppContainer ref={setTopLevelNavigator} state={navigation} />
+        <ModalRouter modal={modal} closeModal={closeModal} />
         <LoadingIndicator {...loadingIndicator} />
-        <AlertRouter alert={alert} closeAlert={closeAlert} />
       </Fragment>
     )
   }

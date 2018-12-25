@@ -6,7 +6,9 @@ export const routeTo = (routeName, params) =>
 
 export const routeBack = () => NavigationActions.back()
 
-export const openActionSheet = options => openAlert('ActionSheet', { options })
+export const openActionSheet = options => openModal('ActionSheet', { options })
+
+export const openDiscoverFilters = () => openModal('DiscoverFilters')
 
 export const openLoadingIndicator = ({ text = 'loading' } = {}) => ({
   type: 'OPEN_LOADING_INDICATOR',
@@ -21,14 +23,14 @@ export const closeLoadingIndicator = ({
   payload: { success, text },
 })
 
-export const openAlert = (alertName, params) => ({
-  type: 'OPEN_ALERT',
+export const openModal = (name, params = {}) => ({
+  type: 'OPEN_MODAL',
   payload: {
-    name: alertName,
+    name,
     params,
   },
 })
 
-export const closeAlert = () => ({ type: 'START_CLOSE_ALERT' })
+export const closeModal = () => ({ type: 'START_CLOSE_MODAL' })
 
-export const endCloseAlert = () => ({ type: 'END_CLOSE_ALERT' })
+export const endcloseModal = () => ({ type: 'END_CLOSE_MODAL' })

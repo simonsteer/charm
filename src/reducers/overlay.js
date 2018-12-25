@@ -2,7 +2,7 @@ import get from 'lodash/get'
 import u from 'updeep'
 
 const initialState = {
-  alert: {
+  modal: {
     isClosing: false,
     name: null,
     params: {},
@@ -26,16 +26,16 @@ const overlayReducer = (state = initialState, action) => {
       return u({ loadingIndicator: { isOpen: false, ...payload } }, state)
     }
 
-    case 'OPEN_ALERT': {
-      return u({ alert: { ...payload } }, state)
+    case 'OPEN_MODAL': {
+      return u({ modal: { ...payload } }, state)
     }
 
-    case 'START_CLOSE_ALERT': {
-      return u({ alert: { isClosing: true } }, state)
+    case 'START_CLOSE_MODAL': {
+      return u({ modal: { isClosing: true } }, state)
     }
 
-    case 'END_CLOSE_ALERT': {
-      return u({ alert: { isClosing: false, name: null, params: {} } }, state)
+    case 'END_CLOSE_MODAL': {
+      return u({ modal: { isClosing: false, name: null, params: {} } }, state)
     }
 
     default:

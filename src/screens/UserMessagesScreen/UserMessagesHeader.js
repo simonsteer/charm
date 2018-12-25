@@ -11,12 +11,12 @@ const UserMessagesHeader = ({ userDisplayName }) => (
         onPress: () => console.log('BLOCKING USER'),
       },
       {
-        title: 'Mute user',
-        onPress: () => console.log('MUTING USER'),
-      },
-      {
         title: 'Hide user',
         onPress: () => console.log('HIDING USER'),
+      },
+      {
+        title: 'Report user',
+        onPress: () => console.log('REPORTING USER'),
       },
     ]}
   />

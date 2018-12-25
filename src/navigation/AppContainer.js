@@ -3,6 +3,7 @@ import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import MessagesHomeScreen from '../screens/MessagesHomeScreen'
 import UserMessagesScreen from '../screens/UserMessagesScreen'
+import DiscoverScreen from '../screens/DiscoverScreen'
 import { create } from 'uuid-js'
 
 const MainStack = createStackNavigator(
@@ -11,6 +12,7 @@ const MainStack = createStackNavigator(
     Profile: ProfileScreen,
     MessagesHome: MessagesHomeScreen,
     UserMessages: UserMessagesScreen,
+    Discover: DiscoverScreen,
   },
   {
     headerMode: 'none',

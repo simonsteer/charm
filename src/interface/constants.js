@@ -39,3 +39,15 @@ export const interfaceStyles = StyleSheet.create({
     shadowOpacity: 0.3,
   },
 })
+
+export const modalStyles = StyleSheet.create({
+  base: {
+    ...interfaceStyles.shadow,
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: COLORS.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: COLORS.lightGrey,
+    elevation: 2,
+  },
+})

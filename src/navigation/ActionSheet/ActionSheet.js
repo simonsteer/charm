@@ -6,7 +6,8 @@ import {
   IPHONE_X_SAFE_BOTTOM_PADDING,
 } from '../../interface/constants'
 import { config } from '../../interface/utils'
-import Alert from '../../interface/Alert'
+import { modalStyles } from '../../interface/constants'
+import Modal from '../../interface/Modal'
 import Flex from '../../interface/Flex'
 import ActionSheetSlat from './ActionSheetSlat'
 
@@ -24,11 +25,11 @@ export default class ActionSheet extends Component {
   render() {
     const {
       state: { translateY, hasOpened },
-      props: { closeAlert, params },
+      props: { closeModal, params },
     } = this
 
     return (
-      <Alert
+      <Modal
         openAnimation={this.openAnimation}
         closeAnimation={this.closeAnimation}
         style={{
@@ -42,17 +43,11 @@ export default class ActionSheet extends Component {
         <Flex
           animated
           style={[
+            modalStyles.base,
             {
-              paddingHorizontal: 16,
               paddingVertical: 4,
-              backgroundColor: COLORS.white,
-              borderRadius: 8,
               transform: [{ translateY }],
-              borderWidth: StyleSheet.hairlineWidth,
-              borderColor: COLORS.lightGrey,
             },
-            interfaceStyles.shadow,
-            config.isAndroid && { elevation: 2 },
           ]}
         >
           {params.options.map((option, index) => (
@@ -63,7 +58,7 @@ export default class ActionSheet extends Component {
             />
           ))}
         </Flex>
-      </Alert>
+      </Modal>
     )
   }
 
@@ -74,10 +69,10 @@ export default class ActionSheet extends Component {
       useNativeDriver: true,
     }).start(() => this.setState({ hasOpened: true }))
 
-  closeAnimation = endCloseAlert =>
+  closeAnimation = endcloseModal =>
     Animated.timing(this.state.translateY, {
       toValue: this.translateYOffset,
       duration: 150,
       useNativeDriver: true,
-    }).start(endCloseAlert)
+    }).start(endcloseModal)
 }
