@@ -12,6 +12,13 @@ const initialState = {
     success: null,
     text: null,
   },
+  snack: {
+    isOpen: false,
+    message: null,
+    ctaText: null,
+    ctaOnPress: null,
+    requiresInteraction: false,
+  },
 }
 
 const overlayReducer = (state = initialState, action) => {
@@ -36,6 +43,17 @@ const overlayReducer = (state = initialState, action) => {
 
     case 'END_CLOSE_MODAL': {
       return u({ modal: { isClosing: false, name: null, params: {} } }, state)
+    }
+
+    case 'OPEN_SNACK': {
+      // NOTE: For some reason updeep attempts to update ctaOnPress
+      // to the return value of the called function instead of
+      // updating it to the function itself
+      return { ...state, snack: { ...payload, isOpen: true } }
+    }
+
+    case 'DISMISS_SNACK': {
+      return u({ snack: initialState.snack }, state)
     }
 
     default:

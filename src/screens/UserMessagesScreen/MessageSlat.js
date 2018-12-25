@@ -22,9 +22,9 @@ const MessageSlat = ({ isFromCurrentUser, text, index }) => {
           {
             maxWidth: config.deviceWidth * 0.75 - 32,
             backgroundColor: isFromCurrentUser
-              ? COLORS.lightPink
-              : COLORS.lightGrey,
-            borderColor: isFromCurrentUser ? COLORS.pink : COLORS.darkGrey,
+              ? COLORS.lightBlue
+              : COLORS.lightPink,
+            borderColor: isFromCurrentUser ? COLORS.blue : COLORS.pink,
             borderBottomLeftRadius: isFromCurrentUser ? 16 : 0,
             borderBottomRightRadius: isFromCurrentUser ? 0 : 16,
           },

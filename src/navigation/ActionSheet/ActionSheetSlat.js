@@ -1,21 +1,14 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import Flex from '../../interface/Flex'
-import Text from '../../interface/Text'
 import { COLORS } from '../../interface/constants'
 import { config } from '../../interface/utils'
+import Flex from '../../interface/Flex'
+import Text from '../../interface/Text'
+import Hairline from '../../interface/Hairline'
 
 const ActionSheetSlat = ({ option, index }) => (
   <View key={`action-sheet-option-${index}`}>
-    {index !== 0 && (
-      <View
-        style={{
-          width: config.deviceWidth - 64,
-          borderTopWidth: index !== 0 ? StyleSheet.hairlineWidth : 0,
-          borderColor: COLORS.pink,
-        }}
-      />
-    )}
+    {index !== 0 && <Hairline style={{ width: config.deviceWidth - 64 }} />}
     <TouchableOpacity onPress={option.onPress}>
       <Flex
         center

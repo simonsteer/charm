@@ -1,7 +1,7 @@
 import noop from 'lodash/noop'
 import { NavigationActions } from 'react-navigation'
 
-export const routeTo = (routeName, params) =>
+export const routeTo = (routeName, params = {}) =>
   NavigationActions.navigate({ routeName, params })
 
 export const routeBack = () => NavigationActions.back()
@@ -22,6 +22,18 @@ export const closeLoadingIndicator = ({
   type: 'CLOSE_LOADING_INDICATOR',
   payload: { success, text },
 })
+
+export const openSnack = ({
+  message = '',
+  ctaText = 'OK',
+  ctaOnPress = () => {},
+  requiresInteraction = false,
+} = {}) => ({
+  type: 'OPEN_SNACK',
+  payload: { message, ctaText, ctaOnPress },
+})
+
+export const closeSnack = () => ({ type: 'DISMISS_SNACK' })
 
 export const openModal = (name, params = {}) => ({
   type: 'OPEN_MODAL',

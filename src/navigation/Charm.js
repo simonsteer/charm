@@ -13,8 +13,8 @@ import ModalRouter from './ModalRouter'
 
 const mapStateToProps = state => ({
   navigation: getNavigation(state),
-  loadingIndicator: getLoadingIndicator(state),
   modal: getModal(state),
+  loadingIndicator: getLoadingIndicator(state),
 })
 
 const mapDispatchToProps = {
@@ -32,7 +32,7 @@ export default class Charm extends Component {
   }
 
   render() {
-    const { navigation, loadingIndicator, modal, closeModal } = this.props
+    const { navigation, modal, closeModal, loadingIndicator } = this.props
 
     return (
       <Fragment>

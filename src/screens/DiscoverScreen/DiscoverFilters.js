@@ -4,8 +4,11 @@ import Modal from '../../interface/Modal'
 import Flex from '../../interface/Flex'
 import Text from '../../interface/Text'
 import Icon from '../../interface/Icon'
+import Hairline from '../../interface/Hairline'
 import { config } from '../../interface/utils'
 import { COLORS, modalStyles } from '../../interface/constants'
+
+const CLOSE_BUTTON_HIT_SLOP = { top: 8, left: 8, right: 8, bottom: 8 }
 
 export default class DiscoverFilters extends Component {
   constructor() {
@@ -46,22 +49,29 @@ export default class DiscoverFilters extends Component {
           ]}
         >
           <Flex center row spaceBetween style={{ width: '100%' }}>
-            <TouchableOpacity onPress={closeModal}>
-              <Text bold>Modify your search</Text>
+            <TouchableOpacity
+              onPress={closeModal}
+              hitSlop={CLOSE_BUTTON_HIT_SLOP}
+            >
+              <Text bold color="blue">
+                MODIFY YOUR SEARCH
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={closeModal}>
               <Icon
                 circle
                 name="ios-close"
-                color={COLORS.white}
+                color={COLORS.black}
+                size={18}
                 style={{
-                  backgroundColor: COLORS.darkGrey,
-                  paddingLeft: 1,
-                  paddingTop: 1,
+                  backgroundColor: COLORS.lightGrey,
+                  width: 20,
+                  height: 20,
                 }}
               />
             </TouchableOpacity>
           </Flex>
+          <Hairline style={{ marginVertical: 16 }} />
           <Text>Option 1</Text>
           <Text>Option 2</Text>
           <Text>Option 3</Text>

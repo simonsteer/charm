@@ -47,6 +47,10 @@ Text.defaultProps = {
 export default Text
 
 const styles = {
+  tiny: {
+    fontSize: 10,
+    letterSpacing: 0.15,
+  },
   small: {
     fontSize: 12,
     letterSpacing: 0.25,

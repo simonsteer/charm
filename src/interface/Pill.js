@@ -41,7 +41,7 @@ const Pill = ({
 }
 
 Pill.defaultProps = {
-  text: null,
+  text: '',
   color: COLORS.black,
   textColor: 'white',
   onPress: null,
@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
 })
 
 const paddingStyles = {
+  tiny: {
+    height: 24,
+    paddingHorizontal: 8,
+  },
   small: {
     height: 32,
     paddingHorizontal: 12,
