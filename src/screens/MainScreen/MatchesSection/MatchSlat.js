@@ -19,23 +19,18 @@ const MatchSlat = ({ user, index, routeToProfile, routeToMessages }) => {
       {index !== 0 && <Hairline />}
       <Flex row center style={{ paddingVertical: 16 }}>
         <Avatar onPress={routeToProfile} />
-        <Flex row spaceBetween style={{ marginLeft: 16, flex: 1 }}>
-          <Flex spaceBetween alignStart>
+        <Flex
+          row
+          spaceBetween
+          style={{ marginLeft: 16, flex: 1, height: '100%' }}
+        >
+          <Flex flex={1} spaceBetween alignStart>
             <TouchableOpacity onPress={routeToProfile}>
-              <Text
-                bold
-                color="darkGrey"
-                style={{ transform: [{ translateY: -2 }] }}
-              >
+              <Text bold color="darkGrey">
                 DisplayName
               </Text>
             </TouchableOpacity>
-            <Text
-              bold
-              size="jumbo"
-              color="pink"
-              style={{ transform: [{ translateY: 8 }] }}
-            >
+            <Text bold size="title" color="pink">
               {`${Math.round(user * 15)}%`}
             </Text>
           </Flex>
