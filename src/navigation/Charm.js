@@ -28,7 +28,7 @@ const mapDispatchToProps = {
 )
 export default class Charm extends Component {
   componentDidMount() {
-    this.props.routeTo('Discover')
+    this.props.routeTo('Main')
   }
 
   render() {

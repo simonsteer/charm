@@ -8,7 +8,7 @@ export const routeBack = () => NavigationActions.back()
 
 export const openActionSheet = options => openModal('ActionSheet', { options })
 
-export const openDiscoverFilters = () => openModal('DiscoverFilters')
+export const openMatchFilters = () => openModal('MatchFilters')
 
 export const openLoadingIndicator = ({ text = 'loading' } = {}) => ({
   type: 'OPEN_LOADING_INDICATOR',

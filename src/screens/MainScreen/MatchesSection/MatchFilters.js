@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Animated, Easing, TouchableOpacity } from 'react-native'
-import Modal from '../../interface/Modal'
-import Flex from '../../interface/Flex'
-import Text from '../../interface/Text'
-import Icon from '../../interface/Icon'
-import Hairline from '../../interface/Hairline'
-import { config } from '../../interface/utils'
-import { COLORS, modalStyles } from '../../interface/constants'
+import Modal from '../../../interface/Modal'
+import Flex from '../../../interface/Flex'
+import Text from '../../../interface/Text'
+import Icon from '../../../interface/Icon'
+import Hairline from '../../../interface/Hairline'
+import { config } from '../../../interface/utils'
+import { COLORS, modalStyles } from '../../../interface/constants'
 
 const CLOSE_BUTTON_HIT_SLOP = { top: 8, left: 8, right: 8, bottom: 8 }
 
-export default class DiscoverFilters extends Component {
+export default class MatchFilters extends Component {
   constructor() {
     super()
     this.state = {
@@ -54,7 +54,7 @@ export default class DiscoverFilters extends Component {
               hitSlop={CLOSE_BUTTON_HIT_SLOP}
             >
               <Text bold color="blue">
-                MODIFY YOUR SEARCH
+                FILTER MATCHES
               </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={closeModal}>

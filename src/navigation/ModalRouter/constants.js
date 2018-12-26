@@ -1,7 +1,7 @@
 import ActionSheet from '../ActionSheet'
-import DiscoverFilters from '../../screens/DiscoverScreen/DiscoverFilters'
+import MatchFilters from '../../screens/MainScreen/MatchesSection/MatchFilters'
 
 export const MODALS = {
   ActionSheet,
-  DiscoverFilters,
+  MatchFilters,
 }
