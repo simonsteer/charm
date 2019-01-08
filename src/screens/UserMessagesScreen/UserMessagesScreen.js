@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { connect } from 'react-redux'
 import Screen from '../../interface/Screen'
 import UserMessagesHeader from './UserMessagesHeader'
 import Flex from '../../interface/Flex'
@@ -9,6 +10,7 @@ import TextInput from '../../interface/TextInput'
 import MessageSlat from './MessageSlat'
 import { COLORS } from '../../interface/constants'
 import { config } from '../../interface/utils'
+import { routeTo } from '../../actions/navigation'
 
 const MOCK_MESSAGES = [
   {
@@ -29,6 +31,14 @@ const MOCK_MESSAGES = [
   },
 ]
 
+const mapDispatchToProps = {
+  routeToProfile: user => routeTo('Profile', { user }),
+}
+
+@connect(
+  null,
+  mapDispatchToProps
+)
 export default class UserMessagesScreen extends Component {
   constructor(props) {
     super(props)
@@ -41,9 +51,17 @@ export default class UserMessagesScreen extends Component {
 
   render() {
     const { messages } = this.state
+    const { routeToProfile } = this.props
 
     return (
-      <Screen header={<UserMessagesHeader />}>
+      <Screen
+        header={
+          <UserMessagesHeader
+            userDisplayName="DisplayName"
+            routeToProfile={() => routeToProfile({ user: null })}
+          />
+        }
+      >
         <FlatList
           contentContainerStyle={{
             paddingHorizontal: 16,

@@ -3,26 +3,30 @@ import { TouchableOpacity, Image, StyleSheet } from 'react-native'
 import Flex from '../interface/Flex'
 import { config } from '../interface/utils'
 
-const Avatar = ({ size, user, onPress, style }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Flex
-      style={[
-        styles.avatarContainer,
-        {
-          width: size || config.deviceWidth * 0.25 - 32,
-          borderRadius: 8,
-        },
-        style,
-      ]}
-    >
-      <Image
-        resizeMode="cover"
-        source={{ uri: user.images[0].uri }}
-        style={styles.avatar}
-      />
-    </Flex>
-  </TouchableOpacity>
-)
+const Avatar = ({ size, user, onPress, style }) => {
+  const avatarSize = size || config.deviceWidth * 0.25 - 32
+
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Flex
+        style={[
+          styles.avatarContainer,
+          {
+            width: avatarSize,
+            borderRadius: avatarSize / 2,
+          },
+          style,
+        ]}
+      >
+        <Image
+          resizeMode="cover"
+          source={{ uri: user.images[0].uri }}
+          style={styles.avatar}
+        />
+      </Flex>
+    </TouchableOpacity>
+  )
+}
 
 Avatar.defaultProps = {
   size: null,

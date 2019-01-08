@@ -7,27 +7,31 @@ import Text from '../../../interface/Text'
 import Hairline from '../../../interface/Hairline'
 import { config } from '../../../interface/utils'
 
-const InboxSection = ({ usersWithMessageHistory }) => {
-  const hasNewMessages = true
+const InboxSection = ({
+  usersWithMessageHistory,
+  routeToProfile,
+  routeToMessages,
+}) => (
+  <FlatList
+    contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 16 }}
+    data={usersWithMessageHistory}
+    keyExtractor={(_, index) => `inbox-avatar-${index}`}
+    renderItem={({ item: user, index }) => {
+      const hasNewMessages = Math.random() > 0.5
 
-  return (
-    <FlatList
-      contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 16 }}
-      data={usersWithMessageHistory}
-      keyExtractor={(_, index) => `inbox-avatar-${index}`}
-      renderItem={({ item: user, index }) => (
+      return (
         <View>
           {index !== 0 && <Hairline />}
-          <TouchableOpacity onPress={() => console.log('GOING TO MESSAGES')}>
+          <TouchableOpacity onPress={() => routeToMessages(user)}>
             <Flex row style={{ paddingVertical: 16 }}>
-              <Avatar />
+              <Avatar onPress={() => routeToProfile(user)} />
               <Flex spaceBetween style={{ marginLeft: 16 }}>
                 <Text bold color={hasNewMessages ? 'darkGrey' : 'darkGrey'}>
                   DisplayName
                 </Text>
                 <Text
-                  bold
-                  color={hasNewMessages ? 'pink' : 'mediumGrey'}
+                  bold={hasNewMessages}
+                  color={hasNewMessages ? 'blue' : 'mediumGrey'}
                   numberOfLines={2}
                   size="small"
                   style={{ width: config.deviceWidth * 0.75 - 16 }}
@@ -39,13 +43,15 @@ const InboxSection = ({ usersWithMessageHistory }) => {
             </Flex>
           </TouchableOpacity>
         </View>
-      )}
-    />
-  )
-}
+      )
+    }}
+  />
+)
 
 InboxSection.defaultProps = {
   usersWithMessageHistory: [],
+  routeToProfile() {},
+  routeToMessages() {},
 }
 
 export default InboxSection

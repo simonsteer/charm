@@ -30,8 +30,8 @@ const TABS = {
 }
 
 const mapDispatchToProps = {
-  routeToProfile: user => routeTo('Profile', user),
-  routeToMessages: user => routeTo('UserMessages', user),
+  routeToProfile: user => routeTo('Profile', { user }),
+  routeToMessages: user => routeTo('UserMessages', { user }),
   openMatchFilters,
 }
 
@@ -102,7 +102,11 @@ export default class MainScreen extends Component {
 
     if (section === TABS.INBOX.NAME) {
       return (
-        <InboxSection usersWithMessageHistory={[1, 2, 3, 4, 45, 5, 6, 6]} />
+        <InboxSection
+          usersWithMessageHistory={[1, 2, 3, 4, 45, 5, 6, 6]}
+          routeToProfile={routeToProfile}
+          routeToMessages={routeToMessages}
+        />
       )
     }
 

@@ -21,7 +21,7 @@ function* loginSaga(action) {
   )
 
   if (/FAILURE$/.test(loginResponseAction.type)) {
-    yield put(closeLoadingIndicator({ success: 'false', text: 'login failed' }))
+    yield put(closeLoadingIndicator({ success: false, text: 'login failed' }))
     return
   }
 
@@ -36,12 +36,12 @@ function* loginSaga(action) {
   )
 
   if (/FAILURE$/.test(currentUserResponseAction.type)) {
-    yield put(closeLoadingIndicator({ success: 'false', text: 'login failed' }))
+    yield put(closeLoadingIndicator({ success: false, text: 'login failed' }))
     return
   }
 
   yield put(closeLoadingIndicator())
-  yield put(routeTo('Profile'))
+  yield put(routeTo('Main'))
 }
 
 export default function* watchLoginSaga() {

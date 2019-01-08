@@ -1,10 +1,16 @@
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import Header from '../../interface/Header'
 import Icon from '../../interface/Icon'
+import Text from '../../interface/Text'
 
-const UserMessagesHeader = ({ userDisplayName }) => (
+const UserMessagesHeader = ({ userDisplayName, routeToProfile }) => (
   <Header
-    heading={userDisplayName}
+    heading={
+      <TouchableOpacity onPress={routeToProfile}>
+        <Text bold>{userDisplayName}</Text>
+      </TouchableOpacity>
+    }
     moreOptions={[
       {
         title: 'Block user',

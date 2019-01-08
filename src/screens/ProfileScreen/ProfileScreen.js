@@ -66,7 +66,9 @@ export default class ProfileScreen extends Component {
         }
         stickyFooterComponent={
           !isEditMode && (
-            <SendMessageButton routeToUserMessages={routeToUserMessages} />
+            <SendMessageButton
+              routeToUserMessages={() => routeToUserMessages(123)}
+            />
           )
         }
         useBottomPadding={false}

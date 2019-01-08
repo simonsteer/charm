@@ -30,6 +30,7 @@ export default class ActionSheet extends Component {
 
     return (
       <Modal
+        shouldShowOverlay
         openAnimation={this.openAnimation}
         closeAnimation={this.closeAnimation}
         style={{
